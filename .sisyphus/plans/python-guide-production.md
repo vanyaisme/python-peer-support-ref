@@ -44,13 +44,12 @@
 
 ## P2 — Post-Launch / Nice-to-Have
 
-- [ ] **P2-1**: Minify CSS and JS after file split — use `cssnano` for `style.css` → `style.min.css` and `terser` for `runner.js` → `runner.min.js`; update `index.html` references
 - [ ] **P2-2**: Add `<link rel="preload">` resource hints for `style.css` and `runner.js` in `<head>`
 - [x] **P2-2**: Add `<link rel="preload">` resource hints for `style.css` and `runner.js` in `<head>`
 - [ ] **P2-4**: Add `<meta http-equiv="Content-Security-Policy">` baseline policy (note: requires `unsafe-eval` and `blob:` worker-src for Pyodide — test thoroughly)
-- [ ] **P2-5**: Add closing section comments (`<!-- /s1 -->` … `<!-- /s32 -->`) to all 32 content section `</div>` closing tags
+- [x] **P2-5**: Add closing section comments (`<!-- /s1 -->` … `<!-- /s32 -->`) to all 32 content section `</div>` closing tags — s11–s32 already had them; added to s1–s10 and s14
 - [x] **P2-6**: Add `td code { ... }` CSS rule (duplicates `.inline-code` styles so all `<code>` in `<td>` cells are automatically styled without class changes)
-- [ ] **P2-7**: Create `manifest.json` for PWA installability; add `<link rel="manifest">` to `<head>`
+- [x] **P2-7**: Created `manifest.json` for PWA installability; added `<link rel="manifest" href="manifest.json">` to `index.html` `<head>`
 - [ ] **P2-8**: Add a Service Worker to cache `index.html`, `style.css`, `runner.js` for offline read-only access (implement after P1-14 file split)
 - [ ] **P2-9**: Run Prettier HTML formatter on `index.html` to fix inconsistent section wrapper indentation (lines ~1216, ~1261, ~1318 and others)
 - [x] **P2-10**: Add a JS comment in the sidebar nav generation code documenting why `id="roadmap"` is excluded from sidebar links
