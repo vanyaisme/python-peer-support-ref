@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V8
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Archives / backups
+*.zip
+*.tar.gz
+*.tar
+*.bak
+
+# Build artifacts
+dist/
+build/
+*.min.css
+*.min.js
+
+# Node / npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn/
+
+# Sisyphus agent ephemeral notes (not source)
+.sisyphus/notepads/
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
