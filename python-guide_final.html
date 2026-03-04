@@ -505,6 +505,17 @@
       background: rgba(255, 255, 255, 0.02);
     }
 
+    /* ── Roadmap table row highlights ── */
+    .roadmap-row-blue          { background: rgba(91,141,238,.08); }
+    .roadmap-row-purple        { background: rgba(167,139,250,.08); }
+    .roadmap-row-green         { background: rgba(52,211,153,.08); }
+    .roadmap-row-orange        { background: rgba(251,146,60,.08); }
+    .roadmap-row-red           { background: rgba(239,68,68,.08); }
+    .roadmap-row-yellow        { background: rgba(250,204,21,.08); }
+    .roadmap-row-blue-strong   { background: rgba(91,141,238,.12); }
+    .roadmap-row-purple-strong { background: rgba(167,139,250,.12); }
+    .roadmap-row-green-strong  { background: rgba(52,211,153,.12); }
+
     td.true {
       color: var(--green);
       font-weight: 600;
@@ -1149,60 +1160,60 @@
                 <th style="width:90px">Sections</th>
                 <th>What you can build</th>
               </tr>
-              <tr style="background:rgba(91,141,238,.08)">
+              <tr class="roadmap-row-blue">
                 <td><strong>Stage 1</strong><br><span style="color:var(--accent);font-size:.85em">Foundations</span>
                 </td>
                 <td>print, Variables, input, Operators, Strings</td>
                 <td><a href="#s1">S1</a>&ndash;<a href="#s5">S5</a></td>
                 <td>Calculator, greeting program, simple decision tree</td>
               </tr>
-              <tr style="background:rgba(167,139,250,.08)">
+              <tr class="roadmap-row-purple">
                 <td><strong>Stage 2</strong><br><span style="color:var(--accent2);font-size:.85em">Control Flow</span>
                 </td>
                 <td>Conditionals, For, While, Nested Loops</td>
                 <td><a href="#s6">S6</a>&ndash;<a href="#s9">S9</a></td>
                 <td>Number guessing game, multiplication table, pattern printer</td>
               </tr>
-              <tr style="background:rgba(52,211,153,.08)">
+              <tr class="roadmap-row-green">
                 <td><strong>Stage 3</strong><br><span style="color:var(--green);font-size:.85em">Data Structures</span>
                 </td>
                 <td>Lists, Tuples &amp; Sets, Dictionaries, Comprehensions</td>
                 <td><a href="#s10">S10</a>&ndash;<a href="#s13">S13</a></td>
                 <td>Grade tracker, inventory system, student database</td>
               </tr>
-              <tr style="background:rgba(251,146,60,.08)">
+              <tr class="roadmap-row-orange">
                 <td><strong>Stage 4</strong><br><span style="color:var(--orange);font-size:.85em">Functions</span></td>
                 <td>Functions, Recursion, map/filter/zip, Generators</td>
                 <td><a href="#s14">S14</a>&ndash;<a href="#s17">S17</a></td>
                 <td>Reusable modules, student class, library system</td>
               </tr>
-              <tr style="background:rgba(239,68,68,.08)">
+              <tr class="roadmap-row-red">
                 <td><strong>Stage 5</strong><br><span style="color:var(--red);font-size:.85em">OOP &amp; Design</span></td>
                 <td>Classes &amp; OOP, Decorators</td>
                 <td><a href="#s18">S18</a>&ndash;<a href="#s19">S19</a></td>
                 <td>Bulletproof scripts, validated CLI programs</td>
               </tr>
-              <tr style="background:rgba(250,204,21,.08)">
+              <tr class="roadmap-row-yellow">
                 <td><strong>Stage 6</strong><br><span style="color:var(--yellow);font-size:.85em">Robustness</span></td>
                 <td>Exception Handling, Context Managers, Common Errors, Debugging</td>
                 <td><a href="#s20">S20</a>&ndash;<a href="#s23">S23</a></td>
                 <td>Data pipelines, config files, log analysers</td>
               </tr>
-              <tr style="background:rgba(91,141,238,.12)">
+              <tr class="roadmap-row-blue-strong">
                 <td><strong>Stage 7</strong><br><span style="color:var(--accent);font-size:.85em">Files &amp; Text</span>
                 </td>
                 <td>File I/O, CSV, JSON, Regular Expressions</td>
                 <td><a href="#s24">S24</a>&ndash;<a href="#s27">S27</a></td>
                 <td>Signal analysis, graphs, data reports, correlation studies</td>
               </tr>
-              <tr style="background:rgba(167,139,250,.12)">
+              <tr class="roadmap-row-purple-strong">
                 <td><strong>Stage 8</strong><br><span style="color:var(--accent2);font-size:.85em">Tooling</span>
                 </td>
                 <td>Imports/Modules/Packages, Collections Module</td>
                 <td><a href="#s28">S28</a>&ndash;<a href="#s29">S29</a></td>
                 <td>Advanced data structures, modular codebases</td>
               </tr>
-              <tr style="background:rgba(52,211,153,.12)">
+              <tr class="roadmap-row-green-strong">
                 <td><strong>Stage 9</strong><br><span style="color:var(--green);font-size:.85em">Data Science</span>
                 </td>
                 <td>Turtle, Matplotlib &amp; scipy, Pandas</td>
