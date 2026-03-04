@@ -28,16 +28,16 @@
 
 ### CSS Quality
 - [x] **P1-10**: Remove duplicate CSS rule blocks — `.scenario-title` (duped ~line 307 & ~609), `.scenario-body` (duped ~line 365 & ~627), `.section` scroll-margin (defined twice); keep the later overriding version
-- [ ] **P1-11**: Replace inline `style="background: rgba(...)"` attributes on roadmap section `<tr>` elements with CSS classes (`.roadmap-row-highlight`, `.roadmap-row-muted`)
+- [x] **P1-11**: Replace inline `style="background: rgba(...)"` attributes on roadmap section `<tr>` elements with CSS classes (`.roadmap-row-highlight`, `.roadmap-row-muted`)
 
 ### HTML Quality
 - [x] **P1-12**: Improve `<noscript>` banner message — ensure it explains: (1) JS is required, (2) Python runner will not work, (3) what read-only content is still accessible
 
 ### Security / Integrity
-- [ ] **P1-13**: Verify Pyodide SRI hash — confirm `sha384-i3R37...` on the CDN `<script>` tag matches the actual Pyodide v0.26.4 release hash
+- [x] **P1-13**: Verify Pyodide SRI hash — confirmed `sha384-i3R37b3tF+HWudsUf1VSEOY2YxwSNMqY8DQa9Z0O3xh+NkJ9o+yjcGyIi5huj+nB` matches actual Pyodide v0.26.4 CDN file (hash correct, no changes needed)
 
 ### Architecture
-- [ ] **P1-14**: Split monolith into separate files — extract inline `<style>` block (~1,046 lines) to `style.css`, extract inline `<script>` block (~632 lines) to `runner.js`, update `<head>` references, test all functionality (theme toggle, copy buttons, Pyodide runner, sidebar nav, collapsible cards)
+- [x] **P1-14**: Split monolith into separate files — extract inline `<style>` block (~1,046 lines) to `style.css`, extract inline `<script>` block (~632 lines) to `runner.js`, update `<head>` references, test all functionality (theme toggle, copy buttons, Pyodide runner, sidebar nav, collapsible cards)
 - [ ] **P1-15**: Resolve `'Fira Code'` font — either add Google Fonts `<link>` import OR remove `'Fira Code'` from the `font-family` stack entirely (fallback chain `'Cascadia Code'` → `'Consolas'` → `monospace` is acceptable)
 
 ---
