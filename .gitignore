@@ -36,3 +36,9 @@ yarn-error.log*
 *.swp
 *.swo
 *~
+
+
+# System/agent artifacts (not project files)
+validate_bash.sh
+validate_skills.py
+sisyphus/
