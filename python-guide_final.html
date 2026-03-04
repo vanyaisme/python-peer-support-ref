@@ -333,6 +333,8 @@
       gap: 8px;
       border-bottom: 1px solid var(--border);
       flex-wrap: wrap;
+      cursor: pointer;
+      user-select: none;
     }
 
     .badge {
@@ -376,6 +378,7 @@
 
     .scenario-body {
       padding: 16px 20px;
+      overflow: hidden;
     }
 
     .scenario-body p {
@@ -618,11 +621,6 @@
     }
 
     /* ── Collapsible scenario cards ── */
-    .scenario-title {
-      cursor: pointer;
-      user-select: none;
-    }
-
     .scenario-title::after {
       content: '▾';
       margin-left: auto;
@@ -634,10 +632,6 @@
 
     .scenario.collapsed .scenario-title::after {
       transform: rotate(-90deg);
-    }
-
-    .scenario-body {
-      overflow: hidden;
     }
 
     .scenario.collapsed .scenario-body {

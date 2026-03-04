@@ -27,7 +27,7 @@
 - [x] **P1-9**: Add `color: #e2e8f0` CSS fallback to the `<h1>` gradient rule (`.header h1`) for screen reader compatibility
 
 ### CSS Quality
-- [ ] **P1-10**: Remove duplicate CSS rule blocks — `.scenario-title` (duped ~line 307 & ~609), `.scenario-body` (duped ~line 365 & ~627), `.section` scroll-margin (defined twice); keep the later overriding version
+- [x] **P1-10**: Remove duplicate CSS rule blocks — `.scenario-title` (duped ~line 307 & ~609), `.scenario-body` (duped ~line 365 & ~627), `.section` scroll-margin (defined twice); keep the later overriding version
 - [ ] **P1-11**: Replace inline `style="background: rgba(...)"` attributes on roadmap section `<tr>` elements with CSS classes (`.roadmap-row-highlight`, `.roadmap-row-muted`)
 
 ### HTML Quality
