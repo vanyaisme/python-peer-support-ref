@@ -6,19 +6,19 @@
 
 ## P0 — Blockers (must fix before any deploy)
 
-- [ ] **P0-1**: Fix canonical URL placeholder — replace `https://your-domain.com/python-guide` with actual deployment URL in `<link rel="canonical">` (lines 7–8)
-- [ ] **P0-2**: Remove the `<!-- TODO: update canonical URL before publishing -->` comment from the `<head>`
+- [x] **P0-1**: Fix canonical URL placeholder — replace `https://your-domain.com/python-guide` with actual deployment URL in `<link rel="canonical">` (lines 7–8)
+- [x] **P0-2**: Remove the `<!-- TODO: update canonical URL before publishing -->` comment from the `<head>`
 
 ---
 
 ## P1 — Important (should fix before launch)
 
 ### SEO & Meta
-- [ ] **P1-1**: Add missing Open Graph meta tags — `og:url` and `og:image` (with `og:image:width`/`og:image:height`) to `<head>`
-- [ ] **P1-2**: Add Twitter/X card meta tags — `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image` to `<head>`
-- [ ] **P1-3**: Add `<meta name="robots">` tag to `<head>` — choose `index, follow` (public) or `noindex, nofollow` (internal) based on intended audience
-- [ ] **P1-4**: Add `<meta name="author">` tag to `<head>`
-- [ ] **P1-5**: Add `<meta name="theme-color">` — two variants (dark: `#0f172a`, light: `#ffffff`) with `media` attributes
+- [x] **P1-1**: Add missing Open Graph meta tags — `og:url` and `og:image` (with `og:image:width`/`og:image:height`) to `<head>`
+- [x] **P1-2**: Add Twitter/X card meta tags — `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image` to `<head>`
+- [x] **P1-3**: Add `<meta name="robots">` tag to `<head>` — choose `index, follow` (public) or `noindex, nofollow` (internal) based on intended audience
+- [x] **P1-4**: Add `<meta name="author">` tag to `<head>`
+- [x] **P1-5**: Add `<meta name="theme-color">` — two variants (dark: `#0f172a`, light: `#ffffff`) with `media` attributes
 
 ### Accessibility
 - [ ] **P1-6**: Replace `<div class="container" role="main">` with `<main class="container">` and update closing tag; wrap sidebar in `<nav class="sidebar" aria-label="Section navigation">`
@@ -31,7 +31,7 @@
 - [ ] **P1-11**: Replace inline `style="background: rgba(...)"` attributes on roadmap section `<tr>` elements with CSS classes (`.roadmap-row-highlight`, `.roadmap-row-muted`)
 
 ### HTML Quality
-- [ ] **P1-12**: Improve `<noscript>` banner message — ensure it explains: (1) JS is required, (2) Python runner will not work, (3) what read-only content is still accessible
+- [x] **P1-12**: Improve `<noscript>` banner message — ensure it explains: (1) JS is required, (2) Python runner will not work, (3) what read-only content is still accessible
 
 ### Security / Integrity
 - [ ] **P1-13**: Verify Pyodide SRI hash — confirm `sha384-i3R37...` on the CDN `<script>` tag matches the actual Pyodide v0.26.4 release hash
