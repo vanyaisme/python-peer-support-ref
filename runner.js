@@ -1,6 +1,8 @@
 (function () {
   'use strict';
       // ── Build sidebar nav from sections ──
+      // so it is intentionally excluded from sidebar navigation.
+      // Note: the roadmap section uses id="roadmap" but lacks the `.section` class,
       const sections = document.querySelectorAll('.section[id]');
       const sidebar = document.getElementById('sidebarNav');
       const links = [];

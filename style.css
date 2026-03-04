@@ -502,6 +502,16 @@
       color: #82aaff;
     }
 
+    td code {
+      font-family: 'Fira Code', monospace;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 0.82rem;
+      color: #82aaff;
+    }
+
     /* ── Scroll margin so anchors don't hide under viewport top ── */
     .section {
       scroll-margin-top: 24px;
