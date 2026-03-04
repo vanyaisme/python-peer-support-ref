@@ -21,10 +21,10 @@
 - [x] **P1-5**: Add `<meta name="theme-color">` — two variants (dark: `#0f172a`, light: `#ffffff`) with `media` attributes
 
 ### Accessibility
-- [ ] **P1-6**: Replace `<div class="container" role="main">` with `<main class="container">` and update closing tag; wrap sidebar in `<nav class="sidebar" aria-label="Section navigation">`
-- [ ] **P1-7**: Add `aria-expanded="false"` to each `.scenario` toggle button in HTML; update JS click handler to toggle `aria-expanded` between `"true"` and `"false"`
-- [ ] **P1-8**: Add `role="switch"` and `aria-checked="false"` to the theme toggle button; update JS to set `aria-checked` on theme change
-- [ ] **P1-9**: Add `color: #e2e8f0` CSS fallback to the `<h1>` gradient rule (`.header h1`) for screen reader compatibility
+- [x] **P1-6**: Replace `<div class="container" role="main">` with `<main class="container">` and update closing tag; wrap sidebar in `<nav class="sidebar" aria-label="Section navigation">`
+- [x] **P1-7**: Add `aria-expanded="false"` to each `.scenario` toggle button in HTML; update JS click handler to toggle `aria-expanded` between `"true"` and `"false"`
+- [x] **P1-8**: Add `role="switch"` and `aria-checked="false"` to the theme toggle button; update JS to set `aria-checked` on theme change
+- [x] **P1-9**: Add `color: #e2e8f0` CSS fallback to the `<h1>` gradient rule (`.header h1`) for screen reader compatibility
 
 ### CSS Quality
 - [ ] **P1-10**: Remove duplicate CSS rule blocks — `.scenario-title` (duped ~line 307 & ~609), `.scenario-body` (duped ~line 365 & ~627), `.section` scroll-margin (defined twice); keep the later overriding version
