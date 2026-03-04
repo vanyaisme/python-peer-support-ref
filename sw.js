@@ -2,7 +2,7 @@
 // Caches static assets for offline read-only access.
 // Version: bump CACHE_NAME to force cache refresh after updates.
 
-const CACHE_NAME = 'python-guide-v1';
+const CACHE_NAME = 'python-guide-v2';
 const ASSETS_TO_CACHE = [
   '/index.html',
   '/style.css',
