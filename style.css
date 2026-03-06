@@ -1353,12 +1353,6 @@ td .inline-code {
   display: none;
 }
 
-.break-svg-mobile {
-  display: none;
-}
-
-
-
 @media (max-width: 768px) {
   .two-col {
       grid-template-columns: 1fr;
@@ -1450,30 +1444,30 @@ td .inline-code {
   }
 
   #secret-btn {
-  width: 18px;
-  height: 18px;
+  width: 54px;
+  height: 54px;
   }
 
   #challenges-btn {
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 18px solid var(--surface);
+  border-left: 31.178px solid transparent;
+  border-right: 31.178px solid transparent;
+  border-bottom: 54px solid var(--surface);
   }
 
-.break-svg-desktop {
+.section-break-line .break-svg-desktop {
   display: none;
 }
 
-.break-svg-mobile {
+.section-break-line .break-svg-mobile {
   display: block;
 }
 
 .section-break-title {
-  font-size: 0.75rem;
+  font-size: 1.4rem;
 }
 
 .section-break-subtitle {
-  font-size: 0.6rem;
+  font-size: 1rem;
 }
 }
 
