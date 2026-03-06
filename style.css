@@ -113,6 +113,10 @@
   background: rgba(160, 120, 16, 0.15);
 }
 
+[data-theme="light"] a:visited {
+  color: #5a5248;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -177,7 +181,6 @@ body {
   color: var(--muted);
 }
 
-/* 1. Your existing button CSS, slightly tweaked for flexbox */
 .toc .theme-btn {
   background: none;
   border: none;
@@ -190,7 +193,6 @@ body {
     background 0.15s;
   opacity: 0.5;
   line-height: 1;
-  /* Add these to perfectly center the SVG: */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -202,20 +204,16 @@ body {
   color: var(--text);
 }
 
-/* 2. Set the size of your SVGs (replacing your old font-size: 1.6rem) */
 .toc .theme-btn svg {
   width: 24px;
   height: 24px;
   display: none;
-  /* Hide both by default */
 }
 
-/* 3. Default state (Dark mode): Show Sun */
 .toc .theme-btn .icon-sun {
   display: block;
 }
 
-/* 4. Light mode state: Hide Sun, Show Moon */
 html[data-theme="light"] .toc .theme-btn .icon-sun {
   display: none;
 }
@@ -348,7 +346,7 @@ html[data-theme="light"] .toc .theme-btn .icon-moon {
 
 .scenario-body {
   padding: 16px 20px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .scenario-body p {
@@ -360,6 +358,97 @@ html[data-theme="light"] .toc .theme-btn .icon-moon {
 .scenario-body p:last-child {
   margin-bottom: 0;
 }
+
+/*  Advanced Module  */
+.advanced-section {
+  margin-top: 60px;
+  padding: 3rem 2rem;
+  background-color: var(--surface2);
+  border: 2px dashed var(--border);
+  border-radius: 16px;
+  position: relative;
+}
+
+/* Horizontal line signaling the end of the core flow */
+.advanced-divider {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+  margin-top: -4.4rem;
+}
+
+.advanced-line {
+  flex: 1;
+  height: 2px;
+  border-bottom: 2px dashed var(--muted);
+  opacity: 0.4;
+}
+
+/* ADVANCED title — text overflows above its backplate */
+.advanced-title {
+  position: relative;
+  font-family: "Fira Code", monospace;
+  font-size: 1.60rem;
+  /* 2x of 0.75rem */
+  font-weight: 1000;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  text-transform: uppercase;
+  padding: 0 1rem;
+  z-index: 1;
+}
+
+.advanced-title::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  /* backplate covers only bottom portion — text overflows above */
+  background: var(--surface2);
+  z-index: -1;
+  border-radius: 3px;
+}
+
+/* Ready for more */
+.ready-more {
+  margin-bottom: 1.2rem;
+}
+
+.ready-more h2 {
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  display: inline-block;
+  position: relative;
+}
+
+.ready-more h2::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 2px;
+  background: var(--orange);
+  border-radius: 2px;
+}
+
+/* Not yet */
+.not-yet p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-style: italic;
+  letter-spacing: 0.06em;
+  font-family: "Fira Code", monospace;
+  opacity: 0.75;
+}
+/* Optional Material End */
+
 
 pre {
   background: var(--code-bg);
@@ -444,11 +533,72 @@ pre {
   margin: 10px 0;
 }
 
-@media (max-width: 640px) {
-  .two-col {
-    grid-template-columns: 1fr;
+  #secret-btn {
+    display: inline-block;
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    background: var(--surface);
+    cursor: pointer;
+    border: 1px solid var(--surface);
   }
-}
+
+  #challenges-btn {
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 86px solid var(--surface);
+    cursor: pointer;
+    display: inline-block;
+    width: 0;
+    height: 0;
+  }
+
+
+
+  /* CREATIVE */
+    /* Overlay — darkens everything on hover */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      z-index: 110;
+    }
+
+    body:has(#secret-btn:hover)::after,
+    body:has(#challenges-btn:hover)::after {
+      opacity: 1;
+    }
+
+    #secret-btn,
+    #challenges-btn {
+      position: relative;
+      z-index: 120;
+      transition: transform 0.6s ease, box-shadow 1s ease, border-color 1s ease;
+    }
+
+    /* Circle hover */
+    #secret-btn:hover {
+      transform: scale(1.6);
+      box-shadow:
+        0 0 12px 3px rgba(255, 255, 255, 0.35),
+        0 0 32px 8px rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Triangle hover — scale only, glow via filter */
+    #challenges-btn:hover {
+      transform: scale(1.6);
+      filter:
+        drop-shadow(0 0 6px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 16px rgba(255, 255, 255, 0.2));
+    }
+        body:has(#secret-btn:hover) #challenges-btn,
+        body:has(#challenges-btn:hover) #secret-btn {
+          z-index: 40;
+        }
 
 table {
   width: 100%;
@@ -475,31 +625,43 @@ tr:nth-child(even) td {
   background: rgba(255, 255, 255, 0.02);
 }
 
-/* ── Roadmap table row highlights ── */
+#roadmap-table td:nth-child(3) {
+  text-align: center;
+  vertical-align: middle;
+}
+
 .roadmap-row-blue {
   background: rgba(91, 141, 238, 0.08);
 }
+
 .roadmap-row-purple {
   background: rgba(167, 139, 250, 0.08);
 }
+
 .roadmap-row-green {
   background: rgba(52, 211, 153, 0.08);
 }
+
 .roadmap-row-orange {
   background: rgba(251, 146, 60, 0.08);
 }
+
 .roadmap-row-red {
   background: rgba(239, 68, 68, 0.08);
 }
+
 .roadmap-row-yellow {
   background: rgba(250, 204, 21, 0.08);
 }
+
 .roadmap-row-blue-strong {
   background: rgba(91, 141, 238, 0.12);
 }
+
 .roadmap-row-purple-strong {
   background: rgba(167, 139, 250, 0.12);
 }
+
 .roadmap-row-green-strong {
   background: rgba(52, 211, 153, 0.12);
 }
@@ -513,6 +675,27 @@ td.false {
   color: var(--red);
   font-weight: 600;
 }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:visited {
+  color: var(--muted);
+}
+
+a:active {
+  color: var(--accent2);
+  opacity: 0.8;
+}
+
 
 .inline-code {
   font-family: "Fira Code", monospace;
@@ -534,12 +717,11 @@ td code {
   color: #82aaff;
 }
 
-/* ── Scroll margin so anchors don't hide under viewport top ── */
 .section {
   scroll-margin-top: 24px;
 }
 
-/* ── Persistent sidebar navigation ── */
+/* ── Sidebar navigation ── */
 .sidebar-nav {
   position: fixed;
   left: max(0px, calc(50% - 530px));
@@ -569,7 +751,7 @@ td code {
   z-index: 99;
 }
 
-.sidebar-hover-zone:hover ~ .sidebar-nav,
+.sidebar-hover-zone:hover~.sidebar-nav,
 .sidebar-nav:hover {
   transform: translateX(0) translateY(-50%);
   opacity: 1;
@@ -605,7 +787,7 @@ td code {
 .back-to-top {
   position: fixed;
   bottom: 28px;
-  right: 28px;
+  right: max(8px, calc(50% - 550px));
   width: 38px;
   height: 38px;
   border-radius: 10px;
@@ -700,7 +882,7 @@ pre {
   z-index: 5;
 }
 
-pre:hover .copy-btn {
+.code-wrapper:hover .copy-btn {
   opacity: 1;
 }
 
@@ -713,11 +895,9 @@ pre:hover .copy-btn {
   opacity: 1;
 }
 
-/* ═══════════════════════════════════════════════
-       PYTHON RUNNER STYLES
-    ═══════════════════════════════════════════════ */
 
-/* ── Run button (sits left of copy button) ── */
+
+/* Run button */
 .run-btn {
   position: absolute;
   top: 6px;
@@ -741,7 +921,7 @@ pre:hover .copy-btn {
   letter-spacing: 0.2px;
 }
 
-pre:hover .run-btn {
+.code-wrapper:hover .run-btn {
   opacity: 1;
 }
 
@@ -765,13 +945,13 @@ pre:hover .run-btn {
 }
 
 /* ── pre state when output panel is open below ── */
-pre.py-open {
+.code-wrapper.py-open>pre {
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
   margin-bottom: 0 !important;
 }
 
-/* ── Output panel ── */
+/*  Output panel  */
 .py-output {
   border: 1px solid var(--border);
   border-top: none;
@@ -874,7 +1054,7 @@ pre.py-open {
   margin: 6px 0 2px;
 }
 
-/* ── Input form for argv / input() snippets ── */
+/*  Input form for argv / input() snippets  */
 .py-form {
   border: 1px solid var(--border);
   border-top: none;
@@ -974,7 +1154,7 @@ pre.py-open {
   border-color: var(--muted);
 }
 
-/* ── Loading / status toast (bottom-right) ── */
+/*  Loading (bottom-right)  */
 #py-toast {
   position: fixed;
   bottom: 78px;
@@ -1014,9 +1194,290 @@ pre.py-open {
   }
 }
 
-/* hide run-btn and py-output in print */
+.zone-divider td {
+  padding: 0.55rem 1rem 0.45rem;
+  border-top: 1px solid var(--border);
+  vertical-align: middle;
+}
 
-/* ── Print / PDF styles ── */
+.zone-icon {
+  font-size: 0.55rem;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  opacity: 0.9;
+  position: relative;
+  top: -1px;
+}
+
+.zone-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-right: 0.75rem;
+}
+
+.zone-desc {
+  font-size: 0.75rem;
+  opacity: 0.55;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.zone-beginner td {
+  background: rgba(52, 211, 153, 0.07);
+}
+
+.zone-beginner .zone-icon,
+.zone-beginner .zone-label {
+  color: var(--green);
+}
+
+.zone-intermediate td {
+  background: rgba(251, 146, 60, 0.07);
+}
+
+.zone-intermediate .zone-icon,
+.zone-intermediate .zone-label {
+  color: var(--orange);
+}
+
+.zone-advanced td {
+  background: rgba(167, 139, 250, 0.07);
+}
+
+.zone-advanced .zone-icon,
+.zone-advanced .zone-label {
+  color: var(--accent2);
+}
+
+/* Code wrapper */
+.code-wrapper {
+  position: relative;
+  margin: 10px 0;
+}
+
+.code-wrapper>pre {
+  margin: 0;
+}
+
+/* Table scroll wrapper for mobile  */
+.table-scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 12px 0;
+}
+
+.table-scroll-wrapper>table {
+  margin: 0;
+  min-width: 400px;
+}
+
+td code,
+td .inline-code {
+  white-space: nowrap;
+}
+
+.site-footer {
+  text-align: center;
+  margin-bottom: 25px;
+  margin-top: 40px;
+  font-family: "Dancing Script", cursive;
+  font-size: 1.5rem;
+  color: var(--muted);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.footer-heart {
+  width: 2em;
+  height: 2em;
+  vertical-align: middle;
+  color: var(--red);
+  opacity: 0.8;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 2.2s ease;
+}
+
+.footer-heart.drawn {
+  stroke-dashoffset: 0;
+}
+
+/*  Mobile nav button & panel  */
+.mobile-nav-btn {
+  display: none;
+}
+
+.mobile-nav-panel {
+  display: none;
+}
+
+.section-break {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  text-align: center;
+}
+
+.section-break-title {
+  display: block;
+  font-family: "Fira Code", monospace;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+  padding-top: 2rem;
+  padding-bottom: 0.4rem;
+}
+
+.section-break-line svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.section-break-subtitle {
+  display: block;
+  font-family: "Fira Code", monospace;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 0.4rem;
+  padding-bottom: 2rem;
+}
+
+.section-break-line .break-svg-mobile {
+  display: none;
+}
+
+.break-svg-mobile {
+  display: none;
+}
+
+
+
+@media (max-width: 768px) {
+  .two-col {
+      grid-template-columns: 1fr;
+    }
+
+  .sidebar-nav,
+    .sidebar-hover-zone {
+      display: none;
+    }
+
+  .mobile-nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 200;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: opacity 0.15s, background 0.15s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .mobile-nav-btn:hover {
+    opacity: 1;
+    background: var(--surface2);
+    color: var(--text);
+  }
+
+  .mobile-nav-panel {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 199;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 56px 10px 60px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    transform: translateY(-110%);
+    transition: transform 0.25s ease;
+    scrollbar-width: none;
+  }
+
+.mobile-nav-panel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-nav-panel.open {
+    transform: translateY(0);
+  }
+
+  .mobile-nav-panel a {
+    flex-shrink: 0;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-family: "Fira Code", monospace;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .mobile-nav-panel a:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  .sidebar-nav,
+  .sidebar-hover-zone {
+    display: none;
+  }
+
+  #secret-btn {
+  width: 18px;
+  height: 18px;
+  }
+
+  #challenges-btn {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 18px solid var(--surface);
+  }
+
+.break-svg-desktop {
+  display: none;
+}
+
+.break-svg-mobile {
+  display: block;
+}
+
+.section-break-title {
+  font-size: 0.75rem;
+}
+
+.section-break-subtitle {
+  font-size: 0.6rem;
+}
+}
+
+/* Print styles  */
 @media print {
   body {
     background: #fff;
@@ -1095,9 +1556,3 @@ pre.py-open {
   }
 }
 
-@media (max-width: 768px) {
-  .sidebar-nav,
-  .sidebar-hover-zone {
-    display: none;
-  }
-}

@@ -51,6 +51,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"
     integrity="sha384-i3R37b3tF+HWudsUf1VSEOY2YxwSNMqY8DQa9Z0O3xh+NkJ9o+yjcGyIi5huj+nB" crossorigin="anonymous"
     defer></script>
@@ -88,29 +89,31 @@
         <a href="#s7"><span class="toc-num">07</span> For Loops</a>
         <a href="#s8"><span class="toc-num">08</span> While Loops</a>
         <a href="#s9"><span class="toc-num">09</span> Nested Loops</a>
-        <a href="#s10"><span class="toc-num">10</span> Lists</a>
-        <a href="#s11"><span class="toc-num">11</span> Tuples &amp; Sets</a>
-        <a href="#s12"><span class="toc-num">12</span> Dictionaries</a>
-        <a href="#s13"><span class="toc-num">13</span> Comprehensions</a>
-        <a href="#s14"><span class="toc-num">14</span> Functions</a>
-        <a href="#s15"><span class="toc-num">15</span> Recursion</a>
-        <a href="#s16"><span class="toc-num">16</span> map, filter &amp; zip</a>
-        <a href="#s17"><span class="toc-num">17</span> Generators &amp; Iterators</a>
-        <a href="#s18"><span class="toc-num">18</span> Classes &amp; OOP</a>
-        <a href="#s19"><span class="toc-num">19</span> Decorators</a>
-        <a href="#s20"><span class="toc-num">20</span> Exception Handling</a>
-        <a href="#s21"><span class="toc-num">21</span> Context Managers</a>
-        <a href="#s22"><span class="toc-num">22</span> Common Errors</a>
-        <a href="#s23"><span class="toc-num">23</span> Debugging</a>
-        <a href="#s24"><span class="toc-num">24</span> File I/O</a>
-        <a href="#s25"><span class="toc-num">25</span> CSV Module</a>
-        <a href="#s26"><span class="toc-num">26</span> JSON Files</a>
-        <a href="#s27"><span class="toc-num">27</span> Regular Expressions</a>
-        <a href="#s28"><span class="toc-num">28</span> Imports &amp; Packages</a>
-        <a href="#s29"><span class="toc-num">29</span> Collections Module</a>
-        <a href="#s30"><span class="toc-num">30</span> Turtle Module</a>
-        <a href="#s31"><span class="toc-num">31</span> Matplotlib &amp; scipy</a>
-        <a href="#s32"><span class="toc-num">32</span> Pandas</a>
+        <a href="#s10"><span class="toc-num">10</span> Exception Handling Basics</a>
+        <a href="#s11"><span class="toc-num">11</span> Lists</a>
+        <a href="#s12"><span class="toc-num">12</span> Tuples &amp; Sets</a>
+        <a href="#s13"><span class="toc-num">13</span> Dictionaries</a>
+        <a href="#s14"><span class="toc-num">14</span> Comprehensions</a>
+        <a href="#s15"><span class="toc-num">15</span> Functions</a>
+        <a href="#s16"><span class="toc-num">16</span> Recursion</a>
+        <a href="#s17"><span class="toc-num">17</span> map, filter &amp; zip</a>
+        <a href="#s18"><span class="toc-num">18</span> Generators &amp; Iterators</a>
+        <a href="#s19"><span class="toc-num">19</span> Classes &amp; OOP</a>
+        <a href="#s20"><span class="toc-num">20</span> Closures</a>
+        <a href="#s21"><span class="toc-num">21</span> Decorators</a>
+        <a href="#s22"><span class="toc-num">22</span> Exception Handling</a>
+        <a href="#s23"><span class="toc-num">23</span> Context Managers</a>
+        <a href="#s24"><span class="toc-num">24</span> Common Errors</a>
+        <a href="#s25"><span class="toc-num">25</span> Debugging</a>
+        <a href="#s26"><span class="toc-num">26</span> File I/O</a>
+        <a href="#s27"><span class="toc-num">27</span> CSV Module</a>
+        <a href="#s28"><span class="toc-num">28</span> JSON Files</a>
+        <a href="#s29"><span class="toc-num">29</span> Regular Expressions</a>
+        <a href="#s30"><span class="toc-num">30</span> Imports &amp; Packages</a>
+        <a href="#s31"><span class="toc-num">31</span> Collections Module</a>
+        <a href="#s32"><span class="toc-num">32</span> Turtle Module</a>
+        <a href="#s33"><span class="toc-num">33</span> Matplotlib &amp; scipy</a>
+        <a href="#s34"><span class="toc-num">34</span> Pandas</a>
       </div>
     </div>
     <!-- ROADMAP -->
@@ -132,17 +135,23 @@
         </div>
         <div class="scenario-body">
           <p>
-            This guide covers Python from first principles to data science
-            workflows. Use this roadmap to understand how the topics connect
-            and build on each other.
+            This guide covers Python from first principles to data science.
+            As a small bonus, it also includes a Python learning roadmap.
           </p>
           <div style="overflow-x: auto">
-            <table>
+            <table id="roadmap-table">
               <tr>
                 <th style="width: 120px">Stage</th>
                 <th>Topics</th>
                 <th style="width: 90px">Sections</th>
-                <th>What you can build</th>
+                <th>What's for?</th>
+              </tr>
+              <tr class="zone-divider zone-beginner">
+                <td colspan="4">
+                  <span class="zone-icon">●</span>
+                  <span class="zone-label">Beginner</span>
+                  <span class="zone-desc">Core Python fundamentals — no prior experience needed</span>
+                </td>
               </tr>
               <tr class="roadmap-row-blue">
                 <td>
@@ -157,8 +166,8 @@
                   <strong>Stage 2</strong><br /><span style="color: var(--accent2); font-size: 0.85em">Control
                     Flow</span>
                 </td>
-                <td>Conditionals, For, While, Nested Loops</td>
-                <td><a href="#s6">S6</a>&ndash;<a href="#s9">S9</a></td>
+                <td>Conditionals, For, While, Nested Loops, Exception Handling Basics</td>
+                <td><a href="#s6">S6</a>&ndash;<a href="#s10">S10</a></td>
                 <td>
                   Number guessing game, multiplication table, pattern printer
                 </td>
@@ -171,15 +180,22 @@
                 <td>
                   Lists, Tuples &amp; Sets, Dictionaries, Comprehensions
                 </td>
-                <td><a href="#s10">S10</a>&ndash;<a href="#s13">S13</a></td>
+                <td><a href="#s11">S11</a>&ndash;<a href="#s14">S14</a></td>
                 <td>Grade tracker, inventory system, student database</td>
+              </tr>
+              <tr class="zone-divider zone-intermediate">
+                <td colspan="4">
+                  <span class="zone-icon">●</span>
+                  <span class="zone-label">Intermediate</span>
+                  <span class="zone-desc">Functions, OOP, and writing robust code</span>
+                </td>
               </tr>
               <tr class="roadmap-row-orange">
                 <td>
                   <strong>Stage 4</strong><br /><span style="color: var(--orange); font-size: 0.85em">Functions</span>
                 </td>
                 <td>Functions, Recursion, map/filter/zip, Generators</td>
-                <td><a href="#s14">S14</a>&ndash;<a href="#s17">S17</a></td>
+                <td><a href="#s15">S15</a>&ndash;<a href="#s18">S18</a></td>
                 <td>Reusable modules, student class, library system</td>
               </tr>
               <tr class="roadmap-row-red">
@@ -187,9 +203,9 @@
                   <strong>Stage 5</strong><br /><span style="color: var(--red); font-size: 0.85em">OOP &amp;
                     Design</span>
                 </td>
-                <td>Classes &amp; OOP, Decorators</td>
-                <td><a href="#s18">S18</a>&ndash;<a href="#s19">S19</a></td>
-                <td>Bulletproof scripts, validated CLI programs</td>
+                <td>Classes &amp; OOP, Closures &amp; First-Class Functions, Decorators</td>
+                <td><a href="#s19">S19</a>&ndash;<a href="#s21">S21</a></td>
+                <td> Reliable scripts, validation of CLI programs</td>
               </tr>
               <tr class="roadmap-row-yellow">
                 <td>
@@ -199,8 +215,15 @@
                   Exception Handling, Context Managers, Common Errors,
                   Debugging
                 </td>
-                <td><a href="#s20">S20</a>&ndash;<a href="#s23">S23</a></td>
+                <td><a href="#s22">S22</a>&ndash;<a href="#s25">S25</a></td>
                 <td>Data pipelines, config files, log analysers</td>
+              </tr>
+              <tr class="zone-divider zone-advanced">
+                <td colspan="4">
+                  <span class="zone-icon">●</span>
+                  <span class="zone-label">Advanced</span>
+                  <span class="zone-desc">Files, tooling, and data science libraries</span>
+                </td>
               </tr>
               <tr class="roadmap-row-blue-strong">
                 <td>
@@ -208,7 +231,7 @@
                     Text</span>
                 </td>
                 <td>File I/O, CSV, JSON, Regular Expressions</td>
-                <td><a href="#s24">S24</a>&ndash;<a href="#s27">S27</a></td>
+                <td><a href="#s26">S26</a>&ndash;<a href="#s29">S29</a></td>
                 <td>
                   Signal analysis, graphs, data reports, correlation studies
                 </td>
@@ -218,15 +241,16 @@
                   <strong>Stage 8</strong><br /><span style="color: var(--accent2); font-size: 0.85em">Tooling</span>
                 </td>
                 <td>Imports/Modules/Packages, Collections Module</td>
-                <td><a href="#s28">S28</a>&ndash;<a href="#s29">S29</a></td>
+                <td><a href="#s30">S30</a>&ndash;<a href="#s31">S31</a></td>
                 <td>Advanced data structures, modular codebases</td>
               </tr>
               <tr class="roadmap-row-green-strong">
                 <td>
-                  <strong>Stage 9</strong><br /><span style="color: var(--green); font-size: 0.85em">Data Science</span>
+                  <strong>Stage 9</strong><br /><span style="color: var(--green); font-size: 0.85em">Data
+                    Science</span>
                 </td>
                 <td>Turtle, Matplotlib &amp; scipy, Pandas</td>
-                <td><a href="#s30">S30</a>&ndash;<a href="#s32">S32</a></td>
+                <td><a href="#s32">S32</a>&ndash;<a href="#s34">S34</a></td>
                 <td>Visualizations, data analysis, scientific computing</td>
               </tr>
             </table>
@@ -318,6 +342,15 @@ python helloworld.py</pre>
 
 <span class="fn">print</span>(<span class="builtin">type</span>(<span class="var">age</span>))     <span class="cmt"># &lt;class 'int'&gt;</span>
 <span class="fn">print</span>(<span class="builtin">type</span>(<span class="var">weight</span>))  <span class="cmt"># &lt;class 'float'&gt;</span></pre>
+          <div class="note">
+            💡 <strong>What is a variable?</strong>
+            A variable is a named box that holds a value — <code class="inline-code">name = "Alice"</code> stores the
+            string
+            <code class="inline-code">"Alice"</code> and lets you refer to it by the name <code
+              class="inline-code">name</code>
+            later.
+            Variables were covered in §2 — Variables &amp; Types.
+          </div>
           <div class="warn">
             ⚠️ Variable names are case-sensitive.
             <span class="inline-code">Age</span> and
@@ -407,25 +440,65 @@ python helloworld.py</pre>
         </div>
         <div class="scenario-body">
           <p>
-            <span class="inline-code">sys.argv</span> is a list. Index 0 is
-            always the filename; your arguments start at index 1. Everything
-            is a string.
+            When you run a Python script, you use the <strong>terminal</strong> — the
+            text window where you type commands (also called the command line). Instead of typing into the program while
+            it runs, you can
+            hand it information <em>right on the same line as the command</em>,
+            before the program even starts. Those extra words are called
+            <strong>arguments</strong>.
           </p>
-          <pre><span class="cmt"># userargument.py</span>
-<span class="kw">import</span> <span class="var">sys</span>
-<span class="fn">print</span>(<span class="str">"Hello"</span>, <span class="var">sys</span>.<span class="var">argv</span>[<span class="num">1</span>])</pre>
-          <pre><span class="cmt"># Terminal:</span>
-python userargument.py Alice
-<span class="cmt"># Output: Hello Alice</span></pre>
-          <pre><span class="cmt"># python usethree.py Alice Bob Carol</span>
-<span class="cmt"># sys.argv = ["usethree.py", "Alice", "Bob", "Carol"]</span>
-<span class="kw">import</span> <span class="var">sys</span>
-<span class="fn">print</span>(<span class="str">f"Hi </span><span class="var">{sys.argv[3]}</span><span class="str">, </span><span class="var">{sys.argv[2]}</span><span class="str">, and </span><span class="var">{sys.argv[1]}</span><span class="str">"</span>)
-<span class="cmt"># Hi Carol, Bob, and Alice   (Exercise 4 — reversed order)</span></pre>
+          <pre><span class="cmt"># In your terminal:</span>
+python greet.py Alice
+<span class="cmt">#              ↑</span>
+<span class="cmt">#              This is an argument — extra input you pass to the program</span></pre>
+          <p>
+            Python automatically collects every word you typed into a list called
+            <span class="inline-code">sys.argv</span>. To use it, add
+            <span class="inline-code">import sys</span> at the top of your file.
+          </p>
           <div class="note">
-            💡 <span class="inline-code">sys.argv[0]</span> is the script name
-            itself. Your first actual input is always at index 1.
+            💡 <strong>What is <code class="inline-code">import</code>?</strong>
+            Python comes with extra built-in tools stored in <em>modules</em>.
+            <code class="inline-code">import sys</code> loads the <code class="inline-code">sys</code> module so you
+            can use it.
+            You'll learn modules in depth in the Imports &amp; Packages section — for now, just know that
+            <code class="inline-code">import X</code> gives you access to <code class="inline-code">X</code>'s tools.
           </div>
+          <pre><span class="cmt"># Terminal:  python greet.py Alice</span>
+<span class="cmt">#</span>
+<span class="cmt"># Python builds this list automatically:</span>
+<span class="cmt"># sys.argv = [ "greet.py",  "Alice"  ]</span>
+<span class="cmt">#               index 0     index 1</span>
+<span class="cmt">#               the file    your first argument</span>
+
+<span class="kw">import</span> <span class="var">sys</span>
+<span class="fn">print</span>(<span class="str">"Hello"</span>, <span class="var">sys</span>.<span class="var">argv</span>[<span class="num">1</span>])  <span class="cmt"># Hello Alice</span></pre>
+          <div class="note">
+            💡 <span class="inline-code">sys.argv[0]</span> is always the script filename
+            itself — not something you typed. Your first real argument is always at
+            <strong>index 1</strong>.
+          </div>
+          <p>
+            You can pass as many arguments as you need, separated by spaces:
+          </p>
+          <pre><span class="cmt"># Terminal:  python greet.py Alice Bob Carol</span>
+<span class="cmt">#</span>
+<span class="cmt"># sys.argv = [ "greet.py",  "Alice",   "Bob",    "Carol"  ]</span>
+<span class="cmt">#               index 0     index 1   index 2    index 3</span>
+
+<span class="kw">import</span> <span class="var">sys</span>
+<span class="fn">print</span>(<span class="str">f"Hi <span class="var">{sys.argv[1]}</span>, <span class="var">{sys.argv[2]}</span>, and <span class="var">{sys.argv[3]}</span>"</span>)
+<span class="cmt"># Hi Alice, Bob, and Carol</span></pre>
+          <div class="note">
+            ⚠️ Everything in <span class="inline-code">sys.argv</span> is always a
+            <strong>string</strong> — even if you type a number. If you need to do
+            math with it, convert it first:
+          </div>
+          <pre><span class="cmt"># Terminal:  python double.py 7</span>
+
+<span class="kw">import</span> <span class="var">sys</span>
+<span class="var">number</span> <span class="op">=</span> <span class="builtin">int</span>(<span class="var">sys</span>.<span class="var">argv</span>[<span class="num">1</span>])   <span class="cmt"># convert string "7" → integer 7</span>
+<span class="fn">print</span>(<span class="var">number</span> <span class="op">*</span> <span class="num">2</span>)              <span class="cmt"># 14</span></pre>
         </div>
       </div>
       <div class="scenario">
@@ -459,74 +532,25 @@ python userargument.py Alice
       </div>
       <div class="scenario">
         <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
-          <span class="badge badge-red">Safe Access</span> Validating sys.argv
-          Arguments
+          <span class="badge badge-orange">Heads up</span> What if you forget to pass arguments?
         </div>
         <div class="scenario-body">
           <p>
-            When your script depends on
-            <code class="inline-code">sys.argv</code>, always check that the
-            right number of arguments were provided before accessing them.
-            Otherwise your script crashes with
-            <code class="inline-code">IndexError: list index out of range</code>.
+            If your script expects <span class="inline-code">sys.argv[1]</span> but you run it
+            without typing any arguments, Python crashes with:
           </p>
-          <table>
-            <tr>
-              <th>Approach</th>
-              <th>When to use</th>
-            </tr>
-            <tr>
-              <td><code class="inline-code">len(sys.argv)</code> check</td>
-              <td>Simple scripts: verify count, print usage if wrong</td>
-            </tr>
-            <tr>
-              <td><code class="inline-code">try/except IndexError</code></td>
-              <td>
-                When you want to handle missing args gracefully at runtime
-              </td>
-            </tr>
-          </table>
-          <pre data-type="argv"><span class='kw'>import</span> sys
+          <pre><span class="cmt"># Terminal:  python greet.py   ← oops, forgot Alice!</span>
 
-<span class='cmt'># Pattern 1: len() guard — check before accessing</span>
-<span class='kw'>if</span> <span class='builtin'>len</span>(sys.argv) &lt; <span class='num'>3</span>:
-    <span class='builtin'>print</span>(<span class='str'>f"Usage: {sys.argv[0]} &lt;name&gt; &lt;age&gt;"</span>)
-    <span class='builtin'>print</span>(<span class='str'>"Example: python script.py Alice 22"</span>)
-    sys.<span class='fn'>exit</span>(<span class='num'>1</span>)  <span class='cmt'># exit with error code</span>
-
-name = sys.argv[<span class='num'>1</span>]
-age  = sys.argv[<span class='num'>2</span>]
-<span class='builtin'>print</span>(<span class='str'>f"Hello, {name}! You are {age} years old."</span>)</pre>
-          <pre data-type="argv"><span class='kw'>import</span> sys
-
-<span class='cmt'># Pattern 2: try/except IndexError + ValueError for type conversion</span>
-<span class='kw'>def</span> <span class='fn'>parse_args</span>():
-    <span class='kw'>try</span>:
-        speed1 = <span class='builtin'>float</span>(sys.argv[<span class='num'>1</span>])
-        speed2 = <span class='builtin'>float</span>(sys.argv[<span class='num'>2</span>])
-        distance = <span class='builtin'>float</span>(sys.argv[<span class='num'>3</span>])
-        <span class='kw'>return</span> speed1, speed2, distance
-    <span class='kw'>except</span> <span class='fn'>IndexError</span>:
-        <span class='builtin'>print</span>(<span class='str'>"Error: not enough arguments."</span>)
-        <span class='builtin'>print</span>(<span class='str'>f"Usage: {sys.argv[0]} &lt;speed1&gt; &lt;speed2&gt; &lt;distance&gt;"</span>)
-        sys.<span class='fn'>exit</span>(<span class='num'>1</span>)
-    <span class='kw'>except</span> <span class='fn'>ValueError</span> <span class='kw'>as</span> e:
-        <span class='builtin'>print</span>(<span class='str'>f"Error: invalid argument — {e}"</span>)
-        sys.<span class='fn'>exit</span>(<span class='num'>1</span>)
-
-<span class='cmt'># Safe defaults when running in an environment without argv</span>
-<span class='kw'>if</span> <span class='builtin'>len</span>(sys.argv) == <span class='num'>1</span>:  <span class='cmt'># no args: use defaults for testing</span>
-    sys.argv = [<span class='str'>"script.py"</span>, <span class='str'>"60"</span>, <span class='str'>"80"</span>, <span class='str'>"200"</span>]
-
-s1, s2, dist = <span class='fn'>parse_args</span>()
-<span class='builtin'>print</span>(<span class='str'>f"Speed1={s1}, Speed2={s2}, Distance={dist}"</span>)</pre>
-          <div class="tip">
-            💡 <strong>Best practice:</strong> always add a
-            <code class="inline-code">len(sys.argv)</code> check at the top of
-            any script that uses <code class="inline-code">sys.argv</code>.
-            Print a clear usage message so users know exactly what arguments
-            are needed.
-          </div>
+<span class="kw">import</span> <span class="var">sys</span>
+<span class="fn">print</span>(<span class="str">"Hello"</span>, <span class="var">sys</span>.<span class="var">argv</span>[<span class="num">1</span>])
+<span class="cmt"># IndexError: list index out of range</span></pre>
+          <p>
+            For now, just make sure you always include the expected arguments when
+            running your script from the terminal. Once you’ve learned
+            <strong>if/else</strong> and <strong>error handling</strong> later in this
+            course, you’ll know how to catch this gracefully and print a helpful
+            message instead of crashing.
+          </p>
         </div>
       </div>
     </div>
@@ -685,19 +709,23 @@ s1, s2, dist = <span class='fn'>parse_args</span>()
           </table>
           <pre><span class='cmt'># Accumulate a running total</span>
 total = <span class='num'>0</span>
-scores = [<span class='num'>85</span>, <span class='num'>92</span>, <span class='num'>78</span>, <span class='num'>90</span>]
-<span class='kw'>for</span> s <span class='kw'>in</span> scores:
-    total += s  <span class='cmt'># cleaner than: total = total + s</span>
-<span class='builtin'>print</span>(<span class='str'>f"Total: {total}, Average: {total/len(scores):.1f}"</span>)
+a = <span class='num'>85</span>
+b = <span class='num'>92</span>
+c = <span class='num'>78</span>
+total += a  <span class='cmt'># cleaner than: total = total + a</span>
+total += b
+total += c
+<span class='builtin'>print</span>(<span class='str'>f"Total: {total}, Average: {total/3:.1f}"</span>)
 
-<span class='cmt'># Works on strings and lists too!</span>
+<span class='cmt'># Works on strings and numbers too!</span>
 message = <span class='str'>"Hello"</span>
 message += <span class='str'>", World"</span>  <span class='cmt'># string concatenation</span>
 <span class='builtin'>print</span>(message)
 
-items = [<span class='num'>1</span>, <span class='num'>2</span>, <span class='num'>3</span>]
-items += [<span class='num'>4</span>, <span class='num'>5</span>]  <span class='cmt'># list extend</span>
-<span class='builtin'>print</span>(items)</pre>
+x = <span class='num'>10</span>
+x += <span class='num'>5</span>
+x *= <span class='num'>2</span>
+<span class='builtin'>print</span>(x)</pre>
         </div>
       </div>
 
@@ -778,9 +806,12 @@ a, b = <span class='num'>5</span>, <span class='num'>3</span>  <span class='cmt'
 <span class='builtin'>print</span>(<span class='str'>f"AND result:  {5&amp;3:08b}"</span>)  <span class='cmt'># 00000001</span>
 
 <span class='cmt'># Practical: fast even/odd check (faster than % 2)</span>
-<span class='kw'>for</span> n <span class='kw'>in</span> <span class='builtin'>range</span>(<span class='num'>1</span>, <span class='num'>7</span>):
-    parity = <span class='str'>"even"</span> <span class='kw'>if</span> (n &amp; <span class='num'>1</span>) == <span class='num'>0</span> <span class='kw'>else</span> <span class='str'>"odd"</span>
-    <span class='builtin'>print</span>(<span class='str'>f"{n} is {parity}"</span>)
+n = <span class='num'>5</span>
+parity = <span class='str'>"even"</span> <span class='kw'>if</span> (n &amp; <span class='num'>1</span>) == <span class='num'>0</span> <span class='kw'>else</span> <span class='str'>"odd"</span>
+<span class='builtin'>print</span>(<span class='str'>f"{n} is {parity}"</span>)
+m = <span class='num'>8</span>
+parity = <span class='str'>"even"</span> <span class='kw'>if</span> (m &amp; <span class='num'>1</span>) == <span class='num'>0</span> <span class='kw'>else</span> <span class='str'>"odd"</span>
+<span class='builtin'>print</span>(<span class='str'>f"{m} is {parity}"</span>)
 
 <span class='cmt'># Flags: combine permissions with OR, check with AND</span>
 READ    = <span class='num'>0b001</span>  <span class='cmt'># 1</span>
@@ -805,25 +836,11 @@ user_perms = READ | WRITE  <span class='cmt'># user has read+write</span>
             same value twice. Named "walrus" for its resemblance to a walrus
             face.
           </p>
-          <pre><span class='cmt'># Without walrus: compute len() twice</span>
-data = [<span class='num'>1</span>, <span class='num'>2</span>, <span class='num'>3</span>, <span class='num'>4</span>, <span class='num'>5</span>]
-<span class='kw'>if</span> <span class='builtin'>len</span>(data) &gt; <span class='num'>3</span>:
-    <span class='builtin'>print</span>(<span class='str'>f"Long list: {len(data)} items"</span>)  <span class='cmt'># len() called twice</span>
-
-<span class='cmt'># With walrus: compute once, assign and test together</span>
-<span class='kw'>if</span> (n := <span class='builtin'>len</span>(data)) &gt; <span class='num'>3</span>:
-    <span class='builtin'>print</span>(<span class='str'>f"Long list: {n} items"</span>)  <span class='cmt'># n already computed</span>
-
-<span class='cmt'># Walrus in while loop — process chunks until empty</span>
-import io
-stream = io.<span class='fn'>StringIO</span>(<span class='str'>"line1\nline2\nline3"</span>)
-<span class='kw'>while</span> (line := stream.<span class='fn'>readline</span>()):
-    <span class='builtin'>print</span>(<span class='str'>f"Read: {line.strip()!r}"</span>)
-
-<span class='cmt'># Walrus in list comprehension with filtering</span>
-numbers = [<span class='num'>1</span>, <span class='num'>4</span>, <span class='num'>9</span>, <span class='num'>16</span>, <span class='num'>25</span>, <span class='num'>36</span>]
-large_roots = [root <span class='kw'>for</span> n <span class='kw'>in</span> numbers <span class='kw'>if</span> (root := n**<span class='num'>0.5</span>) &gt; <span class='num'>4</span>]
-<span class='builtin'>print</span>(large_roots)  <span class='cmt'># [5.0, 6.0] — root computed once per item</span></pre>
+          <pre><span class='cmt'># Simple loop without walrus (use what you already know)</span>
+line = <span class='fn'>input</span>(<span class='str'>"Type something (blank to stop): "</span>)
+<span class='kw'>while</span> line != <span class='str'>""</span>:
+    <span class='builtin'>print</span>(<span class='str'>f"Read: {line}"</span>)
+    line = <span class='fn'>input</span>(<span class='str'>"Type something (blank to stop): "</span>)</pre>
         </div>
       </div>
     </div>
@@ -877,12 +894,12 @@ large_roots = [root <span class='kw'>for</span> n <span class='kw'>in</span> num
           slicing, lower(), and comparison (Exercise 42)
         </div>
         <div class="scenario-body">
-          <pre><span class="var">word</span> <span class="op">=</span> <span class="fn">input</span>(<span class="str">"Enter a word: "</span>).<span class="fn">lower</span>()
-
-<span class="kw">if</span> <span class="var">word</span> <span class="op">==</span> <span class="var">word</span>[::<span class="op">-</span><span class="num">1</span>]:
-    <span class="fn">print</span>(<span class="str">f"'{word}' is a palindrome!"</span>)   <span class="cmt"># "hannah" == "hannah"</span>
-<span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"Not a palindrome."</span>)</pre>
+          <pre><span class="var">text</span> <span class="op">=</span> <span class="str">"  PyThon  "</span>
+<span class="var">clean</span> <span class="op">=</span> <span class="var">text</span>.<span class="fn">strip</span>().<span class="fn">lower</span>()
+<span class="fn">print</span>(<span class="var">clean</span>)             <span class="cmt"># "python"</span>
+<span class="fn">print</span>(<span class="var">clean</span>.<span class="fn">upper</span>())    <span class="cmt"># "PYTHON"</span>
+<span class="fn">print</span>(<span class="var">clean</span>.<span class="fn">replace</span>(<span class="str">"py"</span>, <span class="str">"hi"</span>))  <span class="cmt"># "hithon"</span>
+<span class="fn">print</span>(<span class="var">clean</span>[::<span class="op">-</span><span class="num">1</span>])    <span class="cmt"># "nohtyp"</span></pre>
         </div>
       </div>
       <div class="scenario">
@@ -892,15 +909,75 @@ large_roots = [root <span class='kw'>for</span> n <span class='kw'>in</span> num
         </div>
         <div class="scenario-body">
           <p>
-            Inside f-string braces, a colon
-            <code class="inline-code">:</code> introduces a
-            <strong>format specification</strong> that controls alignment,
-            width, precision, and type. This is far more powerful than just
-            placing a variable.
+            You already know how to drop a variable into a string with f-strings.
+            But what happens when the output looks messy — like a price that only shows
+            one decimal place, or a table where numbers don't line up?
+          </p>
+          <pre><span class="var">price</span> <span class="op">=</span> <span class="num">9.5</span>
+<span class="var">tax</span>   <span class="op">=</span> <span class="num">0.199</span>
+
+<span class="fn">print</span>(<span class="str">f"Price: {price}"</span>)     <span class="cmt"># Price: 9.5    ← looks broken for money</span>
+<span class="fn">print</span>(<span class="str">f"Tax:   {tax}"</span>)       <span class="cmt"># Tax:   0.199</span>
+
+<span class="fn">print</span>(<span class="str">f"Price: {price:.2f}"</span>)  <span class="cmt"># Price: 9.50   ← clean, exactly 2 decimal places</span>
+<span class="fn">print</span>(<span class="str">f"Tax:   {tax:.2f}"</span>)    <span class="cmt"># Tax:   0.20</span></pre>
+          <p>
+            See the <code class="inline-code">:</code> after the variable name? Everything
+            after it is a <strong>format spec</strong> — a short recipe that tells
+            Python <em>how</em> to display the value. <code class="inline-code">:.2f</code>
+            means “float, 2 decimal places”. You can build more complex recipes by
+            combining optional parts left to right:
           </p>
           <p>
-            Syntax:
-            <code class="inline-code">{value:[[fill]align][sign][width][.precision][type]}</code>
+            Think of it as a left-to-right recipe — each part is optional, use only what you need:
+          </p>
+          <table>
+            <tr>
+              <th>Part</th>
+              <th>What it does</th>
+              <th>Common values</th>
+            </tr>
+            <tr>
+              <td><code class="inline-code">type</code></td>
+              <td>Number format</td>
+              <td><code class="inline-code">f</code> float &nbsp; <code class="inline-code">d</code> integer &nbsp;
+                <code class="inline-code">%</code> percent &nbsp; <code class="inline-code">e</code> scientific &nbsp;
+                <code class="inline-code">b</code> binary &nbsp; <code class="inline-code">x</code> hex
+              </td>
+            </tr>
+            <tr>
+              <td><code class="inline-code">.precision</code></td>
+              <td>Decimal places</td>
+              <td><code class="inline-code">.2</code> &rarr; 2 decimal places</td>
+            </tr>
+            <tr>
+              <td><code class="inline-code">width</code></td>
+              <td>Minimum column width</td>
+              <td><code class="inline-code">10</code> &rarr; pad to at least 10 characters</td>
+            </tr>
+            <tr>
+              <td><code class="inline-code">align</code></td>
+              <td>Alignment inside that width</td>
+              <td><code class="inline-code">&lt;</code> left &nbsp; <code class="inline-code">&gt;</code> right &nbsp;
+                <code class="inline-code">^</code> centre
+              </td>
+            </tr>
+            <tr>
+              <td><code class="inline-code">fill</code></td>
+              <td>Padding character (written just before align)</td>
+              <td><code class="inline-code">0&gt;</code> pads with zeros &nbsp;&mdash;&nbsp; default is a space</td>
+            </tr>
+            <tr>
+              <td><code class="inline-code">sign</code></td>
+              <td>When to show + / &minus;</td>
+              <td><code class="inline-code">+</code> always show &nbsp; <code class="inline-code">-</code> negatives
+                only (default)</td>
+            </tr>
+          </table>
+          <p>
+            Combining several parts: <code class="inline-code">f"{3.14159:0>10.2f}"</code> &rarr; pad with <code
+              class="inline-code">0</code>, right-align, 10 chars wide, 2 decimal float &rarr; <code
+              class="inline-code">0000003.14</code>
           </p>
           <table>
             <tr>
@@ -1303,16 +1380,13 @@ pi = <span class='num'>3.14159265358979</span>
             <span class="inline-code">continue</span> skips the rest of the
             current iteration and jumps to the next one.
           </p>
-          <pre><span class="cmt"># break — exit when valid input is received (PIP3 pattern)</span>
-<span class="kw">while</span> <span class="builtin">True</span>:                <span class="cmt"># loop "forever" — only exit via break</span>
-    <span class="var">val</span> <span class="op">=</span> <span class="fn">input</span>(<span class="str">"Enter a positive number: "</span>)
-    <span class="kw">try</span>:
-        <span class="var">n</span> <span class="op">=</span> <span class="builtin">float</span>(<span class="var">val</span>)
-        <span class="kw">if</span> <span class="var">n</span> <span class="op">&gt;</span> <span class="num">0</span>:
-            <span class="kw">break</span>           <span class="cmt"># valid input — exit the loop</span>
-        <span class="fn">print</span>(<span class="str">"Must be positive."</span>)
-    <span class="kw">except</span> <span class="builtin">ValueError</span>:
-        <span class="fn">print</span>(<span class="str">"Not a number."</span>)
+          <pre><span class="cmt"># break — exit the loop on a keyword</span>
+<span class="kw">while</span> <span class="builtin">True</span>:
+    <span class="var">word</span> <span class="op">=</span> <span class="fn">input</span>(<span class="str">"Type a word (or 'quit' to stop): "</span>)
+    <span class="kw">if</span> <span class="var">word</span> <span class="op">==</span> <span class="str">"quit"</span>:
+        <span class="kw">break</span>
+    <span class="fn">print</span>(<span class="str">f"You typed: </span><span class="var">{word}</span><span class="str">"</span>)
+<span class="fn">print</span>(<span class="str">"Loop ended."</span>)
 
 <span class="cmt"># continue — skip even numbers, only print odd</span>
 <span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="builtin">range</span>(<span class="num">1</span>, <span class="num">10</span>):
@@ -1320,6 +1394,11 @@ pi = <span class='num'>3.14159265358979</span>
         <span class="kw">continue</span>            <span class="cmt"># jump straight to next iteration</span>
     <span class="fn">print</span>(<span class="var">i</span>)               <span class="cmt"># 1 3 5 7 9</span></pre>
         </div>
+      </div>
+      <div class="note">
+        💡 <strong>Heads up: validating input</strong>
+        In real programs you'd also want to handle invalid input (e.g. the user types letters when you expect a number).
+        That's covered in §10 — Exception Handling Basics and in depth in §22 — Exception Handling.
       </div>
       <div class="scenario">
         <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
@@ -1391,7 +1470,7 @@ pi = <span class='num'>3.14159265358979</span>
         </div>
         <div class="scenario-body">
           <pre><span class="cmt"># 2³ = 2×2×2 using a loop instead of **</span>
-<span class="kw">for</span> <span class="var">n</span> <span class="kw">in</span> <span class="builtin">list</span>(<span class="builtin">range</span>(<span class="num">1</span>, <span class="num">6</span>)):   <span class="cmt"># n = 1, 2, 3, 4, 5</span>
+<span class="kw">for</span> <span class="var">n</span> <span class="kw">in</span> <span class="builtin">range</span>(<span class="num">1</span>, <span class="num">6</span>):   <span class="cmt"># n = 1, 2, 3, 4, 5</span>
     <span class="var">cube</span> <span class="op">=</span> <span class="num">1</span>
     <span class="kw">for</span> <span class="var">_</span> <span class="kw">in</span> <span class="builtin">range</span>(<span class="num">3</span>):        <span class="cmt"># multiply n by itself 3 times</span>
         <span class="var">cube</span> <span class="op">*=</span> <span class="var">n</span>
@@ -1460,33 +1539,13 @@ pi = <span class='num'>3.14159265358979</span>
         <div class="scenario-body">
           <p>
             When working with a list of lists (like a matrix or grid), nested
-            loops are essential for accessing every element.
+            loops are needed for accessing every element.
           </p>
-          <pre><span class="var">grades</span> <span class="op">=</span> [
-    [<span class="num">85</span>, <span class="num">90</span>, <span class="num">92</span>],  <span class="cmt"># Student 1</span>
-    [<span class="num">78</span>, <span class="num">81</span>, <span class="num">85</span>],  <span class="cmt"># Student 2</span>
-    [<span class="num">95</span>, <span class="num">98</span>, <span class="num">99</span>]   <span class="cmt"># Student 3</span>
-]
-
-<span class="cmt"># Calculate row averages (each student's average)</span>
-<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="builtin">range</span>(<span class="builtin">len</span>(<span class="var">grades</span>)):
-    <span class="var">total</span> <span class="op">=</span> <span class="num">0</span>
-    <span class="kw">for</span> <span class="var">j</span> <span class="kw">in</span> <span class="builtin">range</span>(<span class="builtin">len</span>(<span class="var">grades</span>[<span class="var">i</span>])):
-        <span class="var">total</span> <span class="op">+=</span> <span class="var">grades</span>[<span class="var">i</span>][<span class="var">j</span>]
-    <span class="var">avg</span> <span class="op">=</span> <span class="var">total</span> <span class="op">/</span> <span class="builtin">len</span>(<span class="var">grades</span>[<span class="var">i</span>])
-    <span class="fn">print</span>(<span class="str">f"Student </span>{<span class="var">i</span><span class="op">+</span><span class="num">1</span>}<span class="str"> average: </span>{<span class="var">avg</span>:<span class="num">.1</span>f}<span class="str">"</span>)
-
-<span class="cmt"># Find max value and its position</span>
-<span class="var">max_val</span> <span class="op">=</span> <span class="var">grades</span>[<span class="num">0</span>][<span class="num">0</span>]
-<span class="var">max_pos</span> <span class="op">=</span> (<span class="num">0</span>, <span class="num">0</span>)
-
-<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="builtin">range</span>(<span class="builtin">len</span>(<span class="var">grades</span>)):
-    <span class="kw">for</span> <span class="var">j</span> <span class="kw">in</span> <span class="builtin">range</span>(<span class="builtin">len</span>(<span class="var">grades</span>[<span class="var">i</span>])):
-        <span class="kw">if</span> <span class="var">grades</span>[<span class="var">i</span>][<span class="var">j</span>] <span class="op">&gt;</span> <span class="var">max_val</span>:
-            <span class="var">max_val</span> <span class="op">=</span> <span class="var">grades</span>[<span class="var">i</span>][<span class="var">j</span>]
-            <span class="var">max_pos</span> <span class="op">=</span> (<span class="var">i</span>, <span class="var">j</span>)
-
-<span class="fn">print</span>(<span class="str">f"Highest grade is </span>{<span class="var">max_val</span>}<span class="str"> at row </span>{<span class="var">max_pos</span>[<span class="num">0</span>]}<span class="str">, col </span>{<span class="var">max_pos</span>[<span class="num">1</span>]}<span class="str">"</span>)</pre>
+          <pre><span class="cmt"># Traverse a 3x4 grid and print coordinates</span>
+<span class="kw">for</span> <span class="var">r</span> <span class="kw">in</span> <span class="builtin">range</span>(<span class="num">3</span>):
+    <span class="kw">for</span> <span class="var">c</span> <span class="kw">in</span> <span class="builtin">range</span>(<span class="num">4</span>):
+        <span class="fn">print</span>(<span class="str">f"[</span><span class="var">{r}</span><span class="str">][</span><span class="var">{c}</span><span class="str">]"</span>, <span class="var">end</span><span class="op">=</span><span class="str">" "</span>)
+    <span class="fn">print</span>()</pre>
         </div>
       </div>
       <div class="scenario">
@@ -1517,29 +1576,121 @@ pi = <span class='num'>3.14159265358979</span>
     <span class="kw">if</span> <span class="var">found</span>:
         <span class="kw">break</span>      <span class="cmt"># Break outer</span>
 
-<span class="cmt"># Or better yet, put the loops in a function and use return:</span>
-<span class="kw">def</span> <span class="fn">find_value</span>():
-    <span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="builtin">range</span>(<span class="num">5</span>):
-        <span class="kw">for</span> <span class="var">j</span> <span class="kw">in</span> <span class="builtin">range</span>(<span class="num">5</span>):
-            <span class="kw">if</span> <span class="var">i</span> <span class="op">*</span> <span class="var">j</span> <span class="op">==</span> <span class="num">6</span>:
-                <span class="kw">return</span> (<span class="var">i</span>, <span class="var">j</span>)  <span class="cmt"># Exits both loops and the function immediately</span>
-    <span class="kw">return</span> <span class="kw">None</span></pre>
+<span class="cmt"># A common pattern is to use a flag variable:</span>
+<span class="var">found</span> <span class="op">=</span> <span class="kw">False</span>
+<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="builtin">range</span>(<span class="num">5</span>):
+    <span class="kw">for</span> <span class="var">j</span> <span class="kw">in</span> <span class="builtin">range</span>(<span class="num">5</span>):
+        <span class="kw">if</span> <span class="var">i</span> <span class="op">*</span> <span class="var">j</span> <span class="op">==</span> <span class="num">6</span>:
+            <span class="var">found</span> <span class="op">=</span> <span class="kw">True</span>
+            <span class="kw">break</span>
+    <span class="kw">if</span> <span class="var">found</span>:
+        <span class="kw">break</span></pre>
           <div class="tip">
             💡 <strong>Tip:</strong> Unlike Java or C, Python does not have
             "labeled breaks" (e.g.,
-            <code class="inline-code">break outer_loop</code>). Using a
-            function with <code class="inline-code">return</code> is the
-            cleanest way to exit deeply nested loops.
+            <code class="inline-code">break outer_loop</code>). A flag variable
+            is a simple, beginner-friendly way to exit deeply nested loops.
           </div>
         </div>
       </div>
     </div>
     <!-- /s9 -->
 
-    <!-- 10 — LISTS (ARRAYS) -->
+    <!-- 09b — EXCEPTION HANDLING BASICS (interlude) -->
     <div class="section" id="s10">
       <div class="section-header">
         <div class="section-num">10</div>
+        <h2>Exception Handling Basics</h2>
+      </div>
+      <div class="section-body">
+
+        <p>So far, if your program hits a problem — like the user types a letter when you expected a number — Python
+          <strong>crashes</strong> with an error message. That error is called an <strong>exception</strong>. This
+          section shows you how to catch exceptions so your program can recover gracefully.
+        </p>
+
+        <div class="note">
+          💡 <strong>This is a taste, not the full story.</strong>
+          Exception handling has more features (multiple except blocks, <code class="inline-code">else</code>, <code
+            class="inline-code">finally</code>, custom exceptions). Those are covered in depth in §22 — Exception
+          Handling.
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
+            <span class="badge badge-blue">concept</span>
+            What is an exception?
+          </div>
+          <div class="scenario-body">
+            <p>An exception is Python's way of saying "something went wrong." When Python raises an exception, normal
+              execution stops. Without <code class="inline-code">try/except</code>, the program crashes:</p>
+            <pre>number = int(input("Enter a number: "))
+# If the user types "hello", Python raises:
+# ValueError: invalid literal for int() with base 10: 'hello'</pre>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
+            <span class="badge badge-green">try / except</span>
+            Catching an exception
+          </div>
+          <div class="scenario-body">
+            <p>Wrap risky code in a <code class="inline-code">try</code> block. If it fails, the <code
+                class="inline-code">except</code> block runs instead of crashing:</p>
+            <pre>try:
+    number = int(input("Enter a number: "))
+    print(f"You entered: {number}")
+except ValueError:
+    print("That's not a valid number. Please try again.")</pre>
+            <p>The <code class="inline-code">except ValueError</code> line means: "catch this specific type of error."
+              <code class="inline-code">ValueError</code> is raised when a conversion (like <code
+                class="inline-code">int()</code> or <code class="inline-code">float()</code>) gets the wrong type of
+              input.
+            </p>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
+            <span class="badge badge-blue">concept</span>
+            IndexError — list access out of range
+          </div>
+          <div class="scenario-body">
+            <p>Another common exception: accessing an index that doesn't exist in a list or string.</p>
+            <pre>items = ["apple", "banana", "cherry"]
+try:
+    print(items[5])       # index 5 doesn't exist
+except IndexError:
+    print("Index out of range!")</pre>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
+            <span class="badge badge-green">pattern</span>
+            Keep asking until valid input
+          </div>
+          <div class="scenario-body">
+            <p>Combine <code class="inline-code">while True</code> with <code class="inline-code">try/except</code> to
+              keep prompting until the user enters something valid:</p>
+            <pre>while True:
+    try:
+        age = int(input("Enter your age: "))
+        break          # valid number — exit the loop
+    except ValueError:
+        print("Please enter a whole number.")</pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- /s10 -->
+
+    <!-- 10 — LISTS (ARRAYS) -->
+    <div class="section" id="s11">
+      <div class="section-header">
+        <div class="section-num">11</div>
         <h2>Lists (Arrays)</h2>
       </div>
       <div class="scenario">
@@ -1813,9 +1964,9 @@ pi = <span class='num'>3.14159265358979</span>
     <!-- /s10 -->
 
     <!-- 11 — TUPLES & SETS -->
-    <div class="section" id="s11">
+    <div class="section" id="s12">
       <div class="section-header">
-        <div class="section-num">11</div>
+        <div class="section-num">12</div>
         <h2>Tuples &amp; Sets</h2>
       </div>
 
@@ -2048,9 +2199,9 @@ roles = {perms_admin: <span class='str'>"admin"</span>, perms_viewer: <span clas
     <!-- /s11 -->
 
     <!-- 12 — DICTIONARIES -->
-    <div class="section" id="s12">
+    <div class="section" id="s13">
       <div class="section-header">
-        <div class="section-num">12</div>
+        <div class="section-num">13</div>
         <h2>Dictionaries</h2>
       </div>
 
@@ -2362,9 +2513,9 @@ upper_person = {k: v.<span class='fn'>upper</span>() <span class='kw'>for</span>
     <!-- /s12 -->
 
     <!-- 13 — COMPREHENSIONS -->
-    <div class="section" id="s13">
+    <div class="section" id="s14">
       <div class="section-header">
-        <div class="section-num">13</div>
+        <div class="section-num">14</div>
         <h2>Comprehensions</h2>
       </div>
 
@@ -2594,9 +2745,9 @@ results = {s: (<span class='str'>"Pass"</span> <span class='kw'>if</span> s &gt;
     <!-- /s13 -->
 
     <!-- 14 — FUNCTIONS -->
-    <div class="section" id="s14">
+    <div class="section" id="s15">
       <div class="section-header">
-        <div class="section-num">14</div>
+        <div class="section-num">15</div>
         <h2>Functions</h2>
       </div>
       <div class="scenario">
@@ -2950,9 +3101,9 @@ stats = <span class='fn'>analyse</span>([<span class='num'>72</span>, <span clas
     <!-- /s14 -->
 
     <!-- 15 — RECURSION -->
-    <div class="section" id="s15">
+    <div class="section" id="s16">
       <div class="section-header">
-        <div class="section-num">15</div>
+        <div class="section-num">16</div>
         <h2>Recursion</h2>
       </div>
 
@@ -3141,9 +3292,9 @@ nested_list = [<span class="num">1</span>, [<span class="num">2</span>, [<span c
     <!-- /s15 -->
 
     <!-- 16 — MAP, FILTER & ZIP -->
-    <div class="section" id="s16">
+    <div class="section" id="s17">
       <div class="section-header">
-        <div class="section-num">16</div>
+        <div class="section-num">17</div>
         <h2>map, filter &amp; zip</h2>
       </div>
 
@@ -3315,9 +3466,9 @@ results = <span class="builtin">list</span>(<span class="builtin">zip</span>(ran
     <!-- /s16 -->
 
     <!-- 17 — GENERATORS & ITERATORS -->
-    <div class="section" id="s17">
+    <div class="section" id="s18">
       <div class="section-header">
-        <div class="section-num">17</div>
+        <div class="section-num">18</div>
         <h2>Generators &amp; Iterators</h2>
       </div>
 
@@ -3511,9 +3662,9 @@ fib_gen = <span class="fn">fibonacci</span>()
     <!-- /s17 -->
 
     <!-- 18 — CLASSES & OOP -->
-    <div class="section" id="s18">
+    <div class="section" id="s19">
       <div class="section-header">
-        <div class="section-num">18</div>
+        <div class="section-num">19</div>
         <h2>Classes &amp; OOP</h2>
       </div>
 
@@ -3864,10 +4015,115 @@ s.<span class='fn'>add_score</span>(<span class='str'>"English"</span>, <span cl
       </div>
     </div>
     <!-- /s18 -->
-    <!-- 19 — DECORATORS -->
-    <div class="section" id="s19">
+
+    <!-- 19b — CLOSURES & FIRST-CLASS FUNCTIONS -->
+    <div class="section" id="s20">
       <div class="section-header">
-        <div class="section-num">19</div>
+        <div class="section-num">20</div>
+        <h2>Closures &amp; First-Class Functions</h2>
+      </div>
+      <div class="section-body">
+
+        <p>Before learning <strong>decorators</strong> (§21), you need two ideas: <em>functions are values</em>, and
+          <em>inner functions can remember their outer scope</em>. These are called <strong>first-class
+            functions</strong> and <strong>closures</strong>.
+        </p>
+
+        <div class="scenario">
+          <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
+            <span class="badge badge-blue">concept</span>
+            Functions are values
+          </div>
+          <div class="scenario-body">
+            <p>In Python, a function is just an object — you can assign it to a variable, store it in a list, or pass it
+              to another function:</p>
+            <pre>def greet(name):
+    return f"Hello, {name}!"
+
+say_hello = greet            # no parentheses — we're not calling it
+print(say_hello("Alice"))    # Hello, Alice!</pre>
+            <p><code class="inline-code">say_hello</code> now points to the same function as <code
+                class="inline-code">greet</code>. Calling either works identically.</p>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
+            <span class="badge badge-blue">concept</span>
+            Passing functions as arguments
+          </div>
+          <div class="scenario-body">
+            <p>Because functions are values, you can pass them into other functions:</p>
+            <pre>def shout(text):
+    return text.upper()
+
+def whisper(text):
+    return text.lower()
+
+def speak(message, style):
+    return style(message)      # call whatever function was passed in
+
+print(speak("Hello World", shout))    # HELLO WORLD
+print(speak("Hello World", whisper))  # hello world</pre>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
+            <span class="badge badge-blue">concept</span>
+            Inner functions
+          </div>
+          <div class="scenario-body">
+            <p>You can define a function <em>inside</em> another function. The inner function has access to the outer
+              function's variables:</p>
+            <pre>def make_greeting(language):
+    def greet(name):           # inner function
+        if language == "en":
+            return f"Hello, {name}!"
+        else:
+            return f"Hola, {name}!"
+    return greet               # return the inner function itself</pre>
+            <p>Notice: <code class="inline-code">return greet</code> returns the function object, not its result.</p>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
+            <span class="badge badge-green">closure</span>
+            What is a closure?
+          </div>
+          <div class="scenario-body">
+            <p>A <strong>closure</strong> is an inner function that <em>remembers</em> variables from its enclosing
+              scope, even after the outer function has returned:</p>
+            <pre>def make_multiplier(factor):
+    def multiply(number):
+        return number * factor     # 'factor' is captured from the outer scope
+    return multiply
+
+double = make_multiplier(2)
+triple = make_multiplier(3)
+
+print(double(5))   # 10
+print(triple(5))   # 15</pre>
+            <p><code class="inline-code">double</code> and <code class="inline-code">triple</code> are closures. Each
+              one <em>closes over</em> a different value of <code class="inline-code">factor</code> and remembers it
+              forever.</p>
+          </div>
+        </div>
+
+        <div class="note">
+          💡 <strong>Why does this matter for §21 — Decorators?</strong>
+          A decorator is exactly a function that takes another function as an argument and returns a closure that wraps
+          it. Once you understand closures, decorators are just a pattern built on top of them.
+        </div>
+
+      </div>
+    </div>
+    <!-- /s20 -->
+    <!-- 19 — DECORATORS -->
+    <div class="section" id="s21">
+      <div class="section-header">
+        <div class="section-num">21</div>
         <h2>Decorators</h2>
       </div>
 
@@ -4066,9 +4322,9 @@ temp = <span class="fn">Temperature</span>(<span class="num">25</span>)
     <!-- /s19 -->
 
     <!-- 20 — EXCEPTION HANDLING -->
-    <div class="section" id="s20">
+    <div class="section" id="s22">
       <div class="section-header">
-        <div class="section-num">20</div>
+        <div class="section-num">22</div>
         <h2>Exception Handling</h2>
       </div>
 
@@ -4398,9 +4654,9 @@ age = <span class='fn'>get_positive_int</span>(<span class='str'>"Enter your age
     </div>
     <!-- /s20 -->
     <!-- 21 — CONTEXT MANAGERS -->
-    <div class="section" id="s21">
+    <div class="section" id="s23">
       <div class="section-header">
-        <div class="section-num">21</div>
+        <div class="section-num">23</div>
         <h2>Context Managers</h2>
       </div>
 
@@ -4572,9 +4828,9 @@ lock = <span class="var">threading</span>.<span class="fn">Lock</span>()
     <!-- /s21 -->
 
     <!-- 22 — COMMON ERROR MESSAGES -->
-    <div class="section" id="s22">
+    <div class="section" id="s24">
       <div class="section-header">
-        <div class="section-num">22</div>
+        <div class="section-num">24</div>
         <h2>Common Error Messages</h2>
       </div>
 
@@ -4753,6 +5009,65 @@ i = <span class='num'>5</span>  <span class='cmt'># out of range</span>
     <span class='builtin'>print</span>(items[<span class='num'>99</span>])
 <span class='kw'>except</span> <span class='fn'>IndexError</span>:
     <span class='builtin'>print</span>(<span class='str'>"Index too large"</span>)</pre>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
+          <span class="badge badge-purple">sys.argv</span> Validating command-line arguments
+        </div>
+        <div class="scenario-body">
+          <p>
+            Back in the <strong>sys.argv</strong> section you saw a forward reference:
+            <em>"once you've learned error handling you'll know how to catch a missing
+              argument gracefully"</em>. Now you do. There are two things that can go wrong:
+          </p>
+          <table>
+            <tr>
+              <th>Mistake</th>
+              <th>What crashes</th>
+              <th>Error</th>
+            </tr>
+            <tr>
+              <td>Forgot to pass an argument</td>
+              <td><code class="inline-code">sys.argv[1]</code> doesn't exist</td>
+              <td><code class="inline-code">IndexError</code></td>
+            </tr>
+            <tr>
+              <td>Passed text where a number was expected</td>
+              <td><code class="inline-code">int(sys.argv[1])</code> fails</td>
+              <td><code class="inline-code">ValueError</code></td>
+            </tr>
+          </table>
+          <p>
+            You can guard against both with a simple length check +
+            <code class="inline-code">try/except</code>:
+          </p>
+          <pre><span class='kw'>import</span> sys
+
+<span class='cmt'># Step 1 — did the user actually pass an argument?</span>
+<span class='kw'>if</span> <span class='builtin'>len</span>(sys.argv) &lt; <span class='num'>2</span>:
+    <span class='builtin'>print</span>(<span class='str'>"Usage: python script.py &lt;number&gt;"</span>)
+    sys.<span class='fn'>exit</span>(<span class='num'>1</span>)  <span class='cmt'># stop the program immediately</span>
+
+<span class='cmt'># Step 2 — is it actually a number?</span>
+<span class='kw'>try</span>:
+    value = <span class='builtin'>int</span>(sys.argv[<span class='num'>1</span>])
+<span class='kw'>except</span> <span class='fn'>ValueError</span>:
+    <span class='builtin'>print</span>(<span class='str'>f"Expected a number, got: {sys.argv[1]}"</span>)
+    sys.<span class='fn'>exit</span>(<span class='num'>1</span>)
+
+<span class='cmt'># All good — use the value</span>
+<span class='builtin'>print</span>(<span class='str'>f"Double: {value * 2}"</span>)</pre>
+          <div class="note">
+            💡 <code class="inline-code">sys.exit(1)</code> stops the program immediately.
+            The number <code class="inline-code">1</code> signals to the operating system that
+            something went wrong (exit code 0 means success).
+          </div>
+          <p>
+            You can also wrap the whole thing in a function to keep your script tidy
+            — but that's covered in the Functions section.
+          </p>
         </div>
       </div>
 
@@ -4961,9 +5276,9 @@ text = <span class='str'>"hello"</span>
     <!-- /s22 -->
 
     <!-- 23 — DEBUGGING TECHNIQUES -->
-    <div class="section" id="s23">
+    <div class="section" id="s25">
       <div class="section-header">
-        <div class="section-num">23</div>
+        <div class="section-num">25</div>
         <h2>Debugging Techniques</h2>
       </div>
 
@@ -5243,9 +5558,9 @@ string_methods = [m <span class='kw'>for</span> m <span class='kw'>in</span> <sp
     <!-- /s23 -->
 
     <!-- 24 — FILE I/O -->
-    <div class="section" id="s24">
+    <div class="section" id="s26">
       <div class="section-header">
-        <div class="section-num">24</div>
+        <div class="section-num">26</div>
         <h2>File I/O</h2>
       </div>
       <div class="scenario">
@@ -5308,13 +5623,14 @@ string_methods = [m <span class='kw'>for</span> m <span class='kw'>in</span> <sp
             </tr>
           </table>
         </div>
-        <div class="scenario">
-          <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
-            <span class="badge badge-purple">Error Handling</span>
-            FileNotFoundError &amp; Robust File Access
-          </div>
-          <div class="scenario-body">
-            <pre><span class='kw'>import</span> os
+      </div>
+      <div class="scenario">
+        <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
+          <span class="badge badge-purple">Error Handling</span>
+          FileNotFoundError &amp; Robust File Access
+        </div>
+        <div class="scenario-body">
+          <pre><span class='kw'>import</span> os
 
 <span class='cmt'># Always handle FileNotFoundError when opening files</span>
 <span class='kw'>def</span> <span class='fn'>read_file_safe</span>(filepath):
@@ -5337,16 +5653,16 @@ content = <span class='fn'>read_file_safe</span>(<span class='str'>"data.txt"</s
     <span class='builtin'>print</span>(<span class='str'>"File exists"</span>)
 <span class='kw'>else</span>:
     <span class='builtin'>print</span>(<span class='str'>"File does not exist"</span>)</pre>
-          </div>
         </div>
+      </div>
 
-        <div class="scenario">
-          <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
-            <span class="badge badge-orange">writelines / readlines</span>
-            Writing &amp; Reading Lines Efficiently
-          </div>
-          <div class="scenario-body">
-            <pre><span class='cmt'># writelines() — write a list of strings at once (no auto-newline!)</span>
+      <div class="scenario">
+        <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
+          <span class="badge badge-orange">writelines / readlines</span>
+          Writing &amp; Reading Lines Efficiently
+        </div>
+        <div class="scenario-body">
+          <pre><span class='cmt'># writelines() — write a list of strings at once (no auto-newline!)</span>
 lines = [<span class='str'>"Alice,22,A\n"</span>, <span class='str'>"Bob,21,B\n"</span>, <span class='str'>"Carol,23,A\n"</span>]
 <span class='kw'>with</span> <span class='builtin'>open</span>(<span class='str'>"students.txt"</span>, <span class='str'>"w"</span>) <span class='kw'>as</span> f:
     f.<span class='fn'>writelines</span>(lines)  <span class='cmt'># faster than looping write()</span>
@@ -5368,23 +5684,23 @@ clean = [line.<span class='fn'>strip</span>() <span class='kw'>for</span> line <
 <span class='kw'>with</span> <span class='builtin'>open</span>(<span class='str'>"students.txt"</span>, <span class='str'>"r"</span>) <span class='kw'>as</span> f:
     line_count = <span class='builtin'>sum</span>(<span class='num'>1</span> <span class='kw'>for</span> _ <span class='kw'>in</span> f)  <span class='cmt'># memory-efficient count</span>
 <span class='builtin'>print</span>(<span class='str'>f"Total lines: {line_count}"</span>)</pre>
-          </div>
         </div>
+      </div>
 
-        <div class="scenario">
-          <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
-            <span class="badge badge-red">os.path &amp; pathlib</span>
-            Cross-Platform File Paths
-          </div>
-          <div class="scenario-body">
-            <p>
-              Hard-coded paths like
-              <code class="inline-code">"C:\\Users\\file.txt"</code> break on
-              Mac/Linux. Use <code class="inline-code">os.path</code> or the
-              modern <code class="inline-code">pathlib.Path</code> for
-              portable, OS-independent paths.
-            </p>
-            <pre><span class='kw'>import</span> os
+      <div class="scenario">
+        <div class="scenario-title" aria-expanded="true" role="button" tabindex="0">
+          <span class="badge badge-red">os.path &amp; pathlib</span>
+          Cross-Platform File Paths
+        </div>
+        <div class="scenario-body">
+          <p>
+            Hard-coded paths like
+            <code class="inline-code">"C:\\Users\\file.txt"</code> break on
+            Mac/Linux. Use <code class="inline-code">os.path</code> or the
+            modern <code class="inline-code">pathlib.Path</code> for
+            portable, OS-independent paths.
+          </p>
+          <pre><span class='kw'>import</span> os
 <span class='kw'>from</span> pathlib <span class='kw'>import</span> Path
 
 <span class='cmt'># os.path: classic approach</span>
@@ -5410,16 +5726,16 @@ p2 = <span class='fn'>Path</span>(<span class='str'>"test_pathlib.txt"</span>)
 p2.<span class='fn'>write_text</span>(<span class='str'>"Hello from pathlib!\n"</span>)  <span class='cmt'># auto opens/closes</span>
 <span class='builtin'>print</span>(p2.<span class='fn'>read_text</span>())              <span class='cmt'># auto opens/closes</span>
 <span class='builtin'>print</span>(<span class='str'>"Size:"</span>, p2.<span class='fn'>stat</span>().st_size, <span class='str'>"bytes"</span>)</pre>
-          </div>
         </div>
       </div>
+    </div>
     </div>
     <!-- /s24 -->
 
     <!-- 25 — CSV MODULE -->
-    <div class="section" id="s25">
+    <div class="section" id="s27">
       <div class="section-header">
-        <div class="section-num">25</div>
+        <div class="section-num">27</div>
         <h2>CSV Module</h2>
       </div>
       <div class="scenario">
@@ -5581,9 +5897,9 @@ p2.<span class='fn'>write_text</span>(<span class='str'>"Hello from pathlib!\n"<
     <!-- /s25 -->
 
     <!-- 26 — JSON FILES -->
-    <div class="section" id="s26">
+    <div class="section" id="s28">
       <div class="section-header">
-        <div class="section-num">26</div>
+        <div class="section-num">28</div>
         <h2>JSON Files</h2>
       </div>
 
@@ -5831,9 +6147,9 @@ database = {
     </div>
     <!-- /s26 -->
     <!-- 27 — REGULAR EXPRESSIONS -->
-    <div class="section" id="s27">
+    <div class="section" id="s29">
       <div class="section-header">
-        <div class="section-num">27</div>
+        <div class="section-num">29</div>
         <h2>Regular Expressions</h2>
       </div>
 
@@ -6049,9 +6365,9 @@ email_pattern = <span class="str">r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-
     <!-- /s27 -->
 
     <!-- 28 — IMPORTS, MODULES & PACKAGES -->
-    <div class="section" id="s28">
+    <div class="section" id="s30">
       <div class="section-header">
-        <div class="section-num">28</div>
+        <div class="section-num">30</div>
         <h2>Imports &amp; the Math Module</h2>
       </div>
       <div class="scenario">
@@ -6240,9 +6556,9 @@ email_pattern = <span class="str">r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-
     </div>
     <!-- /s28 -->
     <!-- 29 — COLLECTIONS MODULE -->
-    <div class="section" id="s29">
+    <div class="section" id="s31">
       <div class="section-header">
-        <div class="section-num">29</div>
+        <div class="section-num">31</div>
         <h2>Collections Module</h2>
       </div>
 
@@ -6424,9 +6740,9 @@ history = <span class="fn">deque</span>(maxlen=<span class="num">3</span>)
     <!-- /s29 -->
 
     <!-- 30 — TURTLE MODULE -->
-    <div class="section" id="s30">
+    <div class="section" id="s32">
       <div class="section-header">
-        <div class="section-num">30</div>
+        <div class="section-num">32</div>
         <h2>Turtle Module</h2>
       </div>
       <div class="scenario">
@@ -6589,9 +6905,9 @@ history = <span class="fn">deque</span>(maxlen=<span class="num">3</span>)
       <!-- /s30 -->
 
       <!-- 31 — MATPLOTLIB & SCIPY -->
-      <div class="section" id="s31">
+      <div class="section" id="s33">
         <div class="section-header">
-          <div class="section-num">31</div>
+          <div class="section-num">33</div>
           <h2>Matplotlib &amp; scipy</h2>
         </div>
         <div class="scenario">
@@ -6961,10 +7277,10 @@ plt.show()</pre>
       </div>
       <!-- /s31 -->
 
-      <!-- 32 — PANDAS -->
-      <div class="section" id="s32">
+      <!-- 34 — PANDAS -->
+      <div class="section" id="s34">
         <div class="section-header">
-          <div class="section-num">32</div>
+          <div class="section-num">34</div>
           <h2>Pandas</h2>
         </div>
 
@@ -7519,37 +7835,25 @@ top = flat[flat[<span class='str'>"mean"</span>] &gt;= flat[<span class='str'>"m
         </div>
       </div>
       <!-- /s32 -->
-      <!-- Hidden answers button -->
-      <div style="
-            text-align: center;
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-          ">
-        <span id="secret-btn" data-overlay-show="answers-landing" style="
-              display: inline-block;
-              width: 18px;
-              height: 18px;
-              border-radius: 50%;
-              background: var(--surface);
-              cursor: pointer;
-              border: 1px solid var(--surface);
-            "></span>
-        <span id="challenges-btn" data-overlay-show="challenges-overlay" style="
-              display: inline-block;
-              width: 0;
-              height: 0;
-              border-left: 10px solid transparent;
-              border-right: 10px solid transparent;
-              border-bottom: 18px solid var(--surface);
-              cursor: pointer;
-            "></span>
+
       </div>
 
-      <!-- Challenges overlay -->
-      <div id="challenges-overlay" style="
+      <!-- Hidden answers button -->
+      <div style="
+                  text-align: center;
+                  margin-top: 40px;
+                  margin-bottom: 50px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  gap: 40px;
+                ">
+        <span id="secret-btn" data-overlay-show="answers-landing"></span>
+        <span id="challenges-btn" data-overlay-show="challenges-landing"></span>
+      </div>
+
+      <!-- Challenges landing -->
+      <div id="challenges-landing" style="
             display: none;
             position: fixed;
             top: 0;
@@ -7603,7 +7907,7 @@ top = flat[flat[<span class='str'>"mean"</span>] &gt;= flat[<span class='str'>"m
               ">
             55 challenges covering algorithms, data structures, OOP, dynamic
             programming, backtracking, and more &mdash; from first loop to
-            bytecode VM. No solutions provided. Figure it out. &#x1f40d;
+            bytecode VM. No solutions provided. You will figure it out. Good Luck! &#x1f40d;
           </p>
 
           <!-- ═══════════════════════════════════════════════
@@ -9930,6 +10234,53 @@ top = flat[flat[<span class='str'>"mean"</span>] &gt;= flat[<span class='str'>"m
       <!-- /answers-pip-overlay -->
     </div>
 
+<div class="section-break">
+  <span class="section-break-title">Congratulations!</span>
+  <span class="section-break-subtitle"><p>You successfully completed all main modules.</p>
+    <p></p>And you know what? That's absolutely something to be proud of!</p>
+  </span>
+  <div class="section-break-line">
+
+    <!-- Desktop SVG (hidden on mobile) -->
+    <svg class="break-svg-desktop" viewBox="0 0 1200 140" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <path d="M -10,78 C 30,78 50,66 80,78 C 110,90 130,90 155,79 C 163,77 168,77 175,78 C 210,90 250,66 290,78 C 310,84 320,74 327,73 C 335,71 342,73 350,78 C 390,95 450,62 490,78 C 505,84 513,83 518,82 C 525,81 532,80 545,76 C 580,62 630,90 660,76 C 672,71 682,70 687,70 C 694,70 700,72 715,80 C 750,95 820,62 855,78 C 862,81 867,81 868,80 C 872,79 877,78 890,74 C 930,62 980,90 1010,78 C 1025,72 1035,73 1038,74 C 1043,75 1048,75 1060,78 C 1100,90 1150,66 1210,78"
+        fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="6 4" opacity="0.55"/>
+      <g transform="translate(160,78)" stroke="var(--accent)"><ellipse cx="0" cy="-34" rx="17" ry="22" fill="none" stroke-width="2" stroke-dasharray="5 3" opacity="0.85"/><polygon points="0,-4 -3,-12 3,-12" fill="none" stroke-width="1.5" opacity="0.85"/><path d="M 0,-4 C -7,10 7,22 0,48" fill="none" stroke-width="1.5" opacity="0.65"/></g>
+      <g transform="translate(330,72)" stroke="var(--green)"><ellipse cx="0" cy="-34" rx="17" ry="22" fill="none" stroke-width="2" stroke-dasharray="5 3" opacity="0.85" transform="rotate(13)"/><polygon points="0,-4 -3,-12 3,-12" fill="none" stroke-width="1.5" opacity="0.85"/><path d="M 0,-4 C 8,10 -4,24 2,48" fill="none" stroke-width="1.5" opacity="0.65"/></g>
+      <g transform="translate(520,82)" stroke="var(--orange)"><ellipse cx="0" cy="-34" rx="17" ry="22" fill="none" stroke-width="2" stroke-dasharray="5 3" opacity="0.85"/><polygon points="0,-4 -3,-12 3,-12" fill="none" stroke-width="1.5" opacity="0.85"/><path d="M 0,-4 C -6,12 6,20 -1,48" fill="none" stroke-width="1.5" opacity="0.65"/></g>
+      <g transform="translate(690,70)" stroke="var(--accent2)"><ellipse cx="0" cy="-34" rx="17" ry="22" fill="none" stroke-width="2" stroke-dasharray="5 3" opacity="0.85" transform="rotate(-15)"/><polygon points="0,-4 -3,-12 3,-12" fill="none" stroke-width="1.5" opacity="0.85"/><path d="M 0,-4 C -9,10 5,26 -3,48" fill="none" stroke-width="1.5" opacity="0.65"/></g>
+      <g transform="translate(870,80)" stroke="var(--yellow)"><ellipse cx="0" cy="-34" rx="17" ry="22" fill="none" stroke-width="2" stroke-dasharray="5 3" opacity="0.85" transform="rotate(9)"/><polygon points="0,-4 -3,-12 3,-12" fill="none" stroke-width="1.5" opacity="0.85"/><path d="M 0,-4 C 7,12 -5,22 1,48" fill="none" stroke-width="1.5" opacity="0.65"/></g>
+      <g transform="translate(1040,74)" stroke="var(--muted)"><ellipse cx="0" cy="-34" rx="17" ry="22" fill="none" stroke-width="2" stroke-dasharray="5 3" opacity="0.7"/><polygon points="0,-4 -3,-12 3,-12" fill="none" stroke-width="1.5" opacity="0.7"/><path d="M 0,-4 C -6,12 6,20 0,48" fill="none" stroke-width="1.5" opacity="0.5"/></g>
+    </svg>
+
+    <!-- Mobile SVG (hidden on desktop) -->
+    <svg class="break-svg-mobile" viewBox="0 0 375 110" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <path d="M -5,58 C 15,58 25,46 45,58 C 65,70 75,68 88,59 C 94,56 98,55 102,56 C 122,68 148,44 172,58 C 180,63 185,62 188,61 C 192,60 196,59 204,57 C 224,48 248,70 265,59 C 271,56 275,55 278,55 C 283,55 287,57 298,61 C 312,66 328,55 345,58 C 358,60 368,56 380,58"
+        fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 3" opacity="0.55"/>
+      <g transform="translate(56,58)" stroke="var(--accent)"><ellipse cx="0" cy="-26" rx="14" ry="18" fill="none" stroke-width="2" stroke-dasharray="4 3" opacity="0.85"/><polygon points="0,-2 -3,-9 3,-9" fill="none" stroke-width="1.5" opacity="0.85"/><path d="M 0,-2 C -5,8 5,16 0,36" fill="none" stroke-width="1.5" opacity="0.65"/></g>
+      <g transform="translate(140,56)" stroke="var(--orange)"><ellipse cx="0" cy="-26" rx="14" ry="18" fill="none" stroke-width="2" stroke-dasharray="4 3" opacity="0.85" transform="rotate(12)"/><polygon points="0,-2 -3,-9 3,-9" fill="none" stroke-width="1.5" opacity="0.85"/><path d="M 0,-2 C 6,8 -4,18 1,36" fill="none" stroke-width="1.5" opacity="0.65"/></g>
+      <g transform="translate(234,57)" stroke="var(--accent2)"><ellipse cx="0" cy="-26" rx="14" ry="18" fill="none" stroke-width="2" stroke-dasharray="4 3" opacity="0.85" transform="rotate(-11)"/><polygon points="0,-2 -3,-9 3,-9" fill="none" stroke-width="1.5" opacity="0.85"/><path d="M 0,-2 C -6,8 4,18 -1,36" fill="none" stroke-width="1.5" opacity="0.65"/></g>
+      <g transform="translate(318,58)" stroke="var(--green)"><ellipse cx="0" cy="-26" rx="14" ry="18" fill="none" stroke-width="2" stroke-dasharray="4 3" opacity="0.85" transform="rotate(8)"/><polygon points="0,-2 -3,-9 3,-9" fill="none" stroke-width="1.5" opacity="0.85"/><path d="M 0,-2 C 5,8 -4,16 0,36" fill="none" stroke-width="1.5" opacity="0.65"/></g>
+    </svg>
+
+  </div>
+</div>
+
+    <!--ADVANCED-->
+    <div class="advanced-section">
+      <div class="advanced-divider">
+        <span class="advanced-line"></span>
+        <span class="advanced-title">[ADVANCED]</span>
+        <span class="advanced-line"></span>
+      </div>
+      <div class="scenario-body"
+        style="display: flex; flex-direction: column; align-items: center; text-align: center; border-bottom: none;">
+        <div class="ready-more"><h2>Ready for more?</h2></div>
+        <div class="not-yet"><p style="max-width: 600px;">We are not yet! But we are actively working on it!</p><div></div>
+      </div>
+    </div>
+    <!--TEST-->
+
     <!-- Sidebar navigation -->
     <div class="sidebar-hover-zone"></div>
     <nav class="sidebar-nav" id="sidebarNav"></nav>
@@ -9940,5 +10291,20 @@ top = flat[flat[<span class='str'>"mean"</span>] &gt;= flat[<span class='str'>"m
     <script src="runner.js" defer></script>
   </main>
 </body>
-
+<footer class="site-footer">
+  made with
+<svg class="footer-heart" id="heart" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 48,28
+           C 44,18 28,14 22,24
+           C 16,33 20,44 30,55
+           C 38,64 46,72 50,82
+           C 54,72 63,62 72,52
+           C 82,40 84,28 76,20
+           C 68,12 54,16 48,28
+           L 48,29
+           M 50,82 L 53,88" fill="none" stroke="#c44040" stroke-width="3.5" stroke-linecap="round"
+    stroke-linejoin="round" pathLength="100" />
+</svg>
+  by SICT Support
+</footer>
 </html>
