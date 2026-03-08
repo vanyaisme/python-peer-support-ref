@@ -27,8 +27,7 @@ yarn-error.log*
 .npm
 .yarn/
 
-# Sisyphus agent ephemeral notes (not source)
-.sisyphus/notepads/
+
 
 # IDE / editor
 .vscode/
@@ -38,7 +37,6 @@ yarn-error.log*
 *~
 
 
-# System/agent artifacts (not project files)
-validate_bash.sh
-validate_skills.py
-sisyphus/.sisyphus/
+# System/agent artifacts 
+.sisyphus/
+.sisyphus/notepads/

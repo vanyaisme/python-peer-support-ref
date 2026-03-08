@@ -4,14 +4,68 @@
   const sidebar = document.getElementById("sidebarNav");
   const links = [];
 
+  function getSectionLevel(secId) {
+    const n = parseInt(secId.replace("s", ""), 10);
+    if (isNaN(n)) return null;
+    if (n <= 13) return "beginner";
+    if (n <= 21) return "intermediate";
+    return "advanced";
+  }
+
   sections.forEach((sec) => {
     const num = sec.id.replace("s", "");
     const a = document.createElement("a");
     a.href = "#" + sec.id;
-    a.textContent = num.padStart(2, "0");
+    if (sec.id === "roadmap") {
+      const dot = document.createElement("span");
+      dot.className = "lens-roadmap-dot";
+      a.appendChild(dot);
+      const label = document.createElement("span");
+      label.className = "sidebar-lens-label";
+      label.textContent = "Roadmap";
+      a.appendChild(label);
+    } else {
+      const numSpan = document.createElement("span");
+      numSpan.textContent = num.padStart(2, "0");
+      a.appendChild(numSpan);
+      if (sec.id.match(/^s\d+$/)) {
+        const label = document.createElement("span");
+        label.className = "sidebar-lens-label";
+        label.textContent = sec.querySelector("h2")?.textContent.trim() || "";
+        a.appendChild(label);
+      }
+    }
     a.dataset.section = sec.id;
     sidebar.appendChild(a);
     links.push(a);
+  });
+
+  // ── Lens hover ──
+  sidebar.addEventListener("mouseleave", () => {
+    links.forEach((l) => l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next"));
+    const roadmapLink = links.find(l => l.dataset.section === "roadmap");
+    if (roadmapLink) {
+      const dot = roadmapLink.querySelector(".lens-roadmap-dot");
+      if (dot) dot.classList.remove("lens-dot-beginner", "lens-dot-intermediate", "lens-dot-advanced");
+    }
+  });
+  links.forEach((link, i) => {
+    link.addEventListener("mouseenter", () => {
+      links.forEach((l) => l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next"));
+      link.classList.add("is-lens-current");
+      if (i > 0) links[i - 1].classList.add("is-lens-prev");
+      if (i < links.length - 1) links[i + 1].classList.add("is-lens-next");
+
+      const roadmapLink = links.find(l => l.dataset.section === "roadmap");
+      if (roadmapLink) {
+        const dot = roadmapLink.querySelector(".lens-roadmap-dot");
+        if (dot) {
+          dot.classList.remove("lens-dot-beginner", "lens-dot-intermediate", "lens-dot-advanced");
+          const level = getSectionLevel(link.dataset.section);
+          if (level) dot.classList.add("lens-dot-" + level);
+        }
+      }
+    });
   });
 
   const mobileNavBtn = document.createElement("button");
