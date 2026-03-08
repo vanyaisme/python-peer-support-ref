@@ -1519,9 +1519,9 @@ x *= <span class='num'>2</span>
           <div class="scenario-body">
             <p>An exception is Python's way of saying "something went wrong." When Python raises an exception, normal
               execution stops. Without <code class="inline-code">try/except</code>, the program crashes:</p>
-            <pre>number = int(input("Enter a number: "))
-# If the user types "hello", Python raises:
-# ValueError: invalid literal for int() with base 10: 'hello'</pre>
+            <pre><span class='var'>number</span> <span class='op'>=</span> <span class='fn'>int</span>(<span class='fn'>input</span>(<span class='str'>"Enter a number: "</span>))
+<span class='cmt'># If the user types "hello", Python raises:</span>
+<span class='cmt'># ValueError: invalid literal for int() with base 10: 'hello'</span></pre>
           </div>
         </div>
 
@@ -1533,11 +1533,11 @@ x *= <span class='num'>2</span>
           <div class="scenario-body">
             <p>Wrap risky code in a <code class="inline-code">try</code> block. If it fails, the <code
                 class="inline-code">except</code> block runs instead of crashing:</p>
-            <pre>try:
-    number = int(input("Enter a number: "))
-    print(f"You entered: {number}")
-except ValueError:
-    print("That's not a valid number. Please try again.")</pre>
+            <pre><span class='kw'>try</span>:
+    <span class='var'>number</span> <span class='op'>=</span> <span class='fn'>int</span>(<span class='fn'>input</span>(<span class='str'>"Enter a number: "</span>))
+    <span class='fn'>print</span>(<span class='str'>f"You entered: {number}"</span>)
+<span class='kw'>except</span> <span class='fn'>ValueError</span>:
+    <span class='fn'>print</span>(<span class='str'>"That's not a valid number. Please try again."</span>)</pre>
             <p>The <code class="inline-code">except ValueError</code> line means: "catch this specific type of error."
               <code class="inline-code">ValueError</code> is raised when a conversion (like <code
                 class="inline-code">int()</code> or <code class="inline-code">float()</code>) gets the wrong type of
@@ -1553,11 +1553,11 @@ except ValueError:
           </div>
           <div class="scenario-body">
             <p>Another common exception: accessing a position that doesn't exist in a string.</p>
-            <pre>word = "study"   # characters at indices 0, 1, 2, 3, 4
-try:
-    print(word[10])    # index 10 doesn't exist — valid indices are 0 to 4
-except IndexError:
-    print("Index out of range!")</pre>
+            <pre><span class='var'>word</span> <span class='op'>=</span> <span class='str'>"study"</span>   <span class='cmt'># characters at indices 0, 1, 2, 3, 4</span>
+<span class='kw'>try</span>:
+    <span class='fn'>print</span>(<span class='var'>word</span>[<span class='num'>10</span>])    <span class='cmt'># index 10 doesn't exist — valid indices are 0 to 4</span>
+<span class='kw'>except</span> <span class='fn'>IndexError</span>:
+    <span class='fn'>print</span>(<span class='str'>"Index out of range!"</span>)</pre>
           </div>
         </div>
 
@@ -1569,12 +1569,12 @@ except IndexError:
           <div class="scenario-body">
             <p>Combine <code class="inline-code">while True</code> with <code class="inline-code">try/except</code> to
               keep prompting until the user enters something valid:</p>
-            <pre>while True:
-    try:
-        age = int(input("Enter your age: "))
-        break          # valid number — exit the loop
-    except ValueError:
-        print("Please enter a whole number.")</pre>
+            <pre><span class='kw'>while</span> <span class='kw'>True</span>:
+    <span class='kw'>try</span>:
+        <span class='var'>age</span> <span class='op'>=</span> <span class='fn'>int</span>(<span class='fn'>input</span>(<span class='str'>"Enter your age: "</span>))
+        <span class='kw'>break</span>          <span class='cmt'># valid number — exit the loop</span>
+    <span class='kw'>except</span> <span class='fn'>ValueError</span>:
+        <span class='fn'>print</span>(<span class='str'>"Please enter a whole number."</span>)</pre>
           </div>
         </div>
 
