@@ -1,8 +1,10 @@
 # Python Peer Support Reference
 
-This is a single-page, static web application designed as a complete Python tutorial for psychology students and/or researchers. It uses HTML for structure, CSS for styling, and vanilla JavaScript to power an in-browser Python interpreter using Pyodide.
+This is a single-page, static web application designed as a complete Python tutorial for psychology students and/or researchers. It utilizes HTML for structure, CSS for styling, and JavaScript to power an in-browser Python interpreter using Pyodide.
 
 The application is designed to be a zero-setup learning environment. There is no build process or server-side backend required.
+
+The 1:1 running copy of this repo is accessible through **[peer-support.live](https://peer-support.live)**.
 
 ## Getting Started
 
