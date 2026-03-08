@@ -1038,6 +1038,10 @@ pre {
   overflow-y: auto;
   background: var(--code-bg);
 }
+.py-output-body:has(img) {
+  max-height: none;
+  overflow-y: visible;
+}
 
 .py-output-body.err {
   color: var(--red);
