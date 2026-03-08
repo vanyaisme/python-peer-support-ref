@@ -268,7 +268,7 @@
           </p>
           <div class="note">
             💡 <strong>What is the terminal?</strong>
-            The terminal (also called the <em>command line</em> or <em>command prompt</em>) is a text window on your computer where you type commands directly — no clicking, just typing. On Windows it is called <em>Command Prompt</em> or <em>PowerShell</em>; on Mac and Linux it is simply called <em>Terminal</em>. You will use it throughout this course to run your Python scripts.
+            The terminal (also called the <em>command line</em>) is a text window on your computer where you type and execute commands directly. On Windows it is called <em>PowerShell</em>; on Mac and Linux it is <em>Terminal</em>. You will use it throughout this course to run Python scripts.
           </div>
           <p>A function is a named action you trigger by writing its name followed by parentheses — <span class="inline-code">print(...)</span> tells Python to display something.</p>
           <pre><span class="cmt"># helloworld.py</span>
@@ -276,7 +276,7 @@
           <pre><span class="cmt"># Run it in the terminal:</span>
 python helloworld.py</pre>
           <div class="warn">
-            ⚠️ <span class="inline-code">print()</span> is case-sensitive — Python treats uppercase and lowercase letters as completely different characters.
+            ⚠️ <span class="inline-code">print()</span> is case-sensitive — Python treats uppercase and lowercase letters as different characters.
             <span class="inline-code">Print()</span> and
             <span class="inline-code">PRINT()</span> will crash — Python only
             recognises lowercase <span class="inline-code">print</span>.
@@ -302,12 +302,7 @@ python helloworld.py</pre>
         </div>
         <div class="scenario-body">
           <pre><span class="cmt"># This is a comment — Python ignores it</span>
-<span class="fn">print</span>(<span class="str">"Hello"</span>)  <span class="cmt"># can also go after code on the same line</span>
-
-<span class="cmt"># PEP 8 requires this header in every hand-in file:</span>
-<span class="cmt"># Name: Alice Smith  |  ID: i6123456  |  Date: 2025-09-01</span>
-<span class="cmt"># Group: Group 5     |  Assignment: PIP1</span>
-<span class="cmt"># Goal: Print Hello World 10 times</span></pre>
+<span class="fn">print</span>(<span class="str">"Hello"</span>)  <span class="cmt"># can also go after code on the same line</span></pre>
         </div>
       </div>
     </div>
@@ -333,7 +328,7 @@ python helloworld.py</pre>
 <span class="fn">print</span>(<span class="builtin">type</span>(<span class="var">weight</span>))  <span class="cmt"># &lt;class 'float'&gt;</span></pre>
           <div class="note">
             💡 <strong>What is a Boolean?</strong>
-            A <code class="inline-code">bool</code> (short for Boolean) can only ever hold one of exactly two values: <code class="inline-code">True</code> or <code class="inline-code">False</code>. Think of it as a yes/no switch. You will use booleans constantly when writing conditions — for example, <em>if something is True, do this…</em> Note the capital first letter: Python requires <code class="inline-code">True</code> and <code class="inline-code">False</code>, not <code class="inline-code">true</code> or <code class="inline-code">false</code>.
+            A <code class="inline-code">bool</code> (short for Boolean) can only ever hold one of exactly two values: <code class="inline-code">True</code> or <code class="inline-code">False</code>. You will use booleans constantly when writing conditions — for example, <em>if something is True, do this…</em> Note the capital first letter: Python requires <code class="inline-code">True</code> and <code class="inline-code">False</code> to start with capital letter.
           </div>
           <div class="note">
             💡 <strong>What is a variable?</strong>
@@ -430,9 +425,7 @@ python helloworld.py</pre>
         </div>
         <div class="scenario-body">
           <p>
-            When you run a Python script, you use the <strong>terminal</strong> — the
-            text window where you type commands (also called the command line). Instead of typing into the program while
-            it runs, you can
+            As you remember, to execute Python script, you use the <strong>terminal</strong>.Instead of typing into the program while it runs, you can
             hand it information <em>right on the same line as the command</em>,
             before the program even starts. Those extra words are called
             <strong>arguments</strong>.
