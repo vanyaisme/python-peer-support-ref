@@ -161,6 +161,7 @@
   // ── Wrap all <pre> in .code-wrapper (fixes pinned buttons + scroll) ──
   document.querySelectorAll("pre").forEach((pre) => {
     if (pre.parentElement.classList.contains("code-wrapper")) return;
+    if (pre.parentElement.closest('pre')) return;
     const wrapper = document.createElement("div");
     wrapper.className = "code-wrapper";
     pre.parentNode.insertBefore(wrapper, pre);
@@ -178,6 +179,7 @@
   });
 
   document.querySelectorAll("pre").forEach((pre) => {
+    if (pre.parentElement.closest('pre')) return;
     const btn = document.createElement("button");
     btn.className = "copy-btn";
     btn.textContent = "copy";
@@ -826,6 +828,7 @@ _fc`);
 
   // ── Inject run buttons ────────────────────────────────────────────
   document.querySelectorAll("pre").forEach((pre) => {
+    if (pre.parentElement.closest('pre')) return;
     const btn = document.createElement("button");
     btn.className = "run-btn";
     btn.textContent = "▶ run";
