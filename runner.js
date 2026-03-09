@@ -50,7 +50,9 @@
 
   // ── Lens hover ──
   sidebar.addEventListener("mouseleave", () => {
-    links.forEach((l) => l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next"));
+    links.forEach((l) => {
+      l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next");
+    });
     if (roadmapLink) {
       const dot = roadmapLink.querySelector(".lens-roadmap-dot");
       if (dot) dot.classList.remove("lens-dot-beginner", "lens-dot-intermediate", "lens-dot-advanced");
@@ -58,7 +60,9 @@
   });
   links.forEach((link, i) => {
     link.addEventListener("mouseenter", () => {
-      links.forEach((l) => l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next"));
+      links.forEach((l) => {
+        l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next");
+      });
       link.classList.add("is-lens-current");
       if (i > 0) links[i - 1].classList.add("is-lens-prev");
       if (i < links.length - 1) links[i + 1].classList.add("is-lens-next");
@@ -76,7 +80,9 @@
   // ── Keyboard lens (focusin mirrors mouseenter, focusout mirrors mouseleave) ──
   links.forEach((link, i) => {
     link.addEventListener("focusin", () => {
-      links.forEach((l) => l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next"));
+      links.forEach((l) => {
+        l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next");
+      });
       link.classList.add("is-lens-current");
       if (i > 0) links[i - 1].classList.add("is-lens-prev");
       if (i < links.length - 1) links[i + 1].classList.add("is-lens-next");
@@ -94,7 +100,9 @@
   sidebar.addEventListener("focusout", () => {
     requestAnimationFrame(() => {
       if (sidebar.contains(document.activeElement)) return;
-      links.forEach((l) => l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next"));
+      links.forEach((l) => {
+        l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next");
+      });
       if (roadmapLink) {
         const dot = roadmapLink.querySelector(".lens-roadmap-dot");
         if (dot) dot.classList.remove("lens-dot-beginner", "lens-dot-intermediate", "lens-dot-advanced");
@@ -151,36 +159,53 @@
     }
   });
 
+  const linkMap = new Map(links.map((l) => [l.dataset.section, l]));
+
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((e) => {
-        const link = sidebar.querySelector(`a[data-section="${e.target.id}"]`);
-        if (link) link.classList.toggle("active", e.isIntersecting);
+      requestAnimationFrame(() => {
+        entries.forEach((e) => {
+          const link = linkMap.get(e.target.id);
+          if (link) link.classList.toggle('active', e.isIntersecting);
+        });
       });
     },
-    { rootMargin: "-10% 0px -80% 0px" },
+    { rootMargin: '-10% 0px -80% 0px' },
   );
 
-  sections.forEach((s) => observer.observe(s));
+  sections.forEach((s) => {
+    observer.observe(s);
+  });
   window._sectionObserver = observer;
 
-  const heartObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          heart.classList.add("drawn");
+  const heartEl = document.getElementById('heart');
+  if (heartEl) {
+    const heartObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          heartEl.classList.add('drawn');
+          heartObserver.disconnect();
         }
-      });
-    },
-    { threshold: 0.4 },
-  );
-  heartObserver.observe(heart);
+      },
+      { threshold: 0.4 },
+    );
+    heartObserver.observe(heartEl);
+  }
 
   const topBtn = document.getElementById("backToTop");
+  let _scrollRafId = 0;
+  let _topBtnVisible = false;
   window.addEventListener(
-    "scroll",
+    'scroll',
     () => {
-      topBtn.classList.toggle("visible", window.scrollY > 500);
+      cancelAnimationFrame(_scrollRafId);
+      _scrollRafId = requestAnimationFrame(() => {
+        const shouldShow = window.scrollY > 500;
+        if (shouldShow !== _topBtnVisible) {
+          _topBtnVisible = shouldShow;
+          topBtn.classList.toggle('visible', shouldShow);
+        }
+      });
     },
     { passive: true },
   );
@@ -595,7 +620,9 @@
   // ── Code text extraction ─────────────────────────────────────────
   function getCode(pre) {
     const clone = pre.cloneNode(true);
-    clone.querySelectorAll("button").forEach((b) => b.remove());
+    clone.querySelectorAll("button").forEach((b) => {
+      b.remove();
+    });
     return clone.textContent.trim();
   }
 
