@@ -601,12 +601,12 @@
       </div>
       <div class="py-output-body" id="_live_body"></div>
     `;
-    _livePanel
+    const panel = _livePanel;
+    panel
       .querySelector(".py-output-close")
       .addEventListener("click", () => {
-        if (!_livePanel) return;
-        _livePanel.remove();
-        _livePanel = null;
+        panel.remove();
+        if (_livePanel === panel) _livePanel = null;
         if (_currentPre) _currentPre.parentElement.classList.remove("py-open");
       });
     _currentPre.parentElement.insertAdjacentElement("afterend", _livePanel);
