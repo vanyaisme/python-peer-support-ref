@@ -4,6 +4,7 @@
   const sidebar = document.getElementById("sidebarNav");
   const links = [];
   let savedScrollY = 0;
+  let _overlayOpenCount = 0;
 
   function getSectionLevel(secId) {
     const n = parseInt(secId.replace("s", ""), 10);
@@ -373,26 +374,35 @@
       lastFocusedElement = document.activeElement;
     }
 
-    if (toHide) {
-      const el = document.getElementById(toHide);
-      if (el) el.style.display = "none";
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      window.scrollTo(0, savedScrollY);
-    }
     if (toShow) {
       const el = document.getElementById(toShow);
       if (el) {
-        savedScrollY = window.scrollY;
-        document.body.style.top = `-${savedScrollY}px`;
-        document.body.style.position = "fixed";
-        document.body.style.width = "100%";
+        _overlayOpenCount += 1;
+        if (_overlayOpenCount === 1) {
+          savedScrollY = window.scrollY;
+          document.body.style.top = `-${savedScrollY}px`;
+          document.body.style.position = "fixed";
+          document.body.style.width = "100%";
+        }
         el.style.display = "flex";
         const focusable = el.querySelector(
           "button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])",
         );
         if (focusable) focusable.focus();
+      }
+    }
+
+    if (toHide) {
+      const el = document.getElementById(toHide);
+      if (el) {
+        el.style.display = "none";
+        if (_overlayOpenCount > 0) _overlayOpenCount -= 1;
+        if (_overlayOpenCount === 0) {
+          document.body.style.position = "";
+          document.body.style.top = "";
+          document.body.style.width = "";
+          window.scrollTo(0, savedScrollY);
+        }
       }
     }
 
