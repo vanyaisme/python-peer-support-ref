@@ -429,6 +429,16 @@
   let _currentPre = null;
   let _currentBtn = null;
   let _inputPanel = null; // active input DOM element
+  let _resolveReady = null;
+  const readyPromise = new Promise((resolve) => {
+    _resolveReady = resolve;
+  });
+
+  function setRunButtonsEnabled(enabled) {
+    document.querySelectorAll(".run-btn").forEach((btn) => {
+      btn.disabled = !enabled;
+    });
+  }
 
   function getWorker() {
     if (_worker) return _worker;
@@ -458,6 +468,11 @@
 
     if (type === "ready") {
       toastHide();
+      setRunButtonsEnabled(true);
+      if (_resolveReady) {
+        _resolveReady();
+        _resolveReady = null;
+      }
       return;
     }
 
@@ -850,7 +865,7 @@
   }
 
   // Core execution
-  function execCode(pre, btn, code) {
+  async function execCode(pre, btn, code) {
     if (_running) return;
     _running = true;
     _currentPre = pre;
@@ -866,6 +881,7 @@
     code = addContext(code);
 
     const worker = getWorker();
+    await readyPromise;
     worker.postMessage({ type: "run", code });
   }
 
@@ -976,6 +992,7 @@
     const btn = document.createElement("button");
     btn.className = "run-btn";
     btn.textContent = "▶ run";
+    btn.disabled = true;
     btn.setAttribute("aria-label", "Run Python code");
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
