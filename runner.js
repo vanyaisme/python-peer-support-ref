@@ -412,7 +412,7 @@
     if (e.key !== "Escape") return;
     e.preventDefault();
     const hideBtn = activeOverlay.querySelector(
-      `[data-overlay-hide="${activeOverlay.id}"]`,
+      `[data-overlay-hide="${activeOverlay.id}"]:not([data-overlay-show])`,
     );
     if (hideBtn) hideBtn.click();
   });

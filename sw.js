@@ -2,14 +2,14 @@
 // Caches static assets for offline read-only access.
 // Version: bump CACHE_NAME to force cache refresh after updates.
 
-const CACHE_NAME = "python-guide-v7";
+const CACHE_NAME = "python-guide-v9";
 const ASSETS_TO_CACHE = [
   "/index.html",
   "/style.css",
   "/runner.js",
   "/manifest.json",
   "/pyodide-worker.js",
-  "/favicon.png",
+  "/favicon.png?v=5",
 ];
 
 self.addEventListener("install", (event) => {
