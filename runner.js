@@ -364,6 +364,34 @@
 
   // Overlay show/hide via data-overlay-* attributes
   let lastFocusedElement = null;
+  const overlayIds = Array.from(
+    new Set(
+      Array.from(
+        document.querySelectorAll("[data-overlay-show],[data-overlay-hide]"),
+      ).flatMap((el) => [el.dataset.overlayShow, el.dataset.overlayHide]),
+    ),
+  ).filter(Boolean);
+
+  function getActiveOverlayElement() {
+    for (let i = overlayIds.length - 1; i >= 0; i -= 1) {
+      const el = document.getElementById(overlayIds[i]);
+      if (el && getComputedStyle(el).display !== "none") return el;
+    }
+    return null;
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (_overlayOpenCount <= 0) return;
+    if (e.key !== "Escape") return;
+    e.preventDefault();
+    const activeOverlay = getActiveOverlayElement();
+    if (!activeOverlay) return;
+    const hideBtn = activeOverlay.querySelector(
+      `[data-overlay-hide="${activeOverlay.id}"]`,
+    );
+    if (hideBtn) hideBtn.click();
+  });
+
   document.addEventListener("click", function (e) {
     const btn = e.target.closest("[data-overlay-show],[data-overlay-hide]");
     if (!btn) return;
