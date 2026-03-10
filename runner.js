@@ -3,6 +3,8 @@
   const sections = document.querySelectorAll(".section[id]");
   const sidebar = document.getElementById("sidebarNav");
   const links = [];
+  let savedScrollY = 0;
+  let _overlayOpenCount = 0;
 
   function getSectionLevel(secId) {
     const n = parseInt(secId.replace("s", ""), 10);
@@ -44,21 +46,32 @@
     links.push(a);
   });
 
-  const roadmapLink = links.find(l => l.dataset.section === "roadmap");
+  const roadmapLink = links.find((l) => l.dataset.section === "roadmap");
   let cachedSidebarW = sidebar.offsetWidth;
-  window.addEventListener("resize", () => { cachedSidebarW = sidebar.offsetWidth; });
+  window.addEventListener("resize", () => {
+    cachedSidebarW = sidebar.offsetWidth;
+  });
 
   // ── Lens hover ──
   sidebar.addEventListener("mouseleave", () => {
-    links.forEach((l) => l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next"));
+    links.forEach((l) => {
+      l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next");
+    });
     if (roadmapLink) {
       const dot = roadmapLink.querySelector(".lens-roadmap-dot");
-      if (dot) dot.classList.remove("lens-dot-beginner", "lens-dot-intermediate", "lens-dot-advanced");
+      if (dot)
+        dot.classList.remove(
+          "lens-dot-beginner",
+          "lens-dot-intermediate",
+          "lens-dot-advanced",
+        );
     }
   });
   links.forEach((link, i) => {
     link.addEventListener("mouseenter", () => {
-      links.forEach((l) => l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next"));
+      links.forEach((l) => {
+        l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next");
+      });
       link.classList.add("is-lens-current");
       if (i > 0) links[i - 1].classList.add("is-lens-prev");
       if (i < links.length - 1) links[i + 1].classList.add("is-lens-next");
@@ -66,7 +79,11 @@
       if (roadmapLink) {
         const dot = roadmapLink.querySelector(".lens-roadmap-dot");
         if (dot) {
-          dot.classList.remove("lens-dot-beginner", "lens-dot-intermediate", "lens-dot-advanced");
+          dot.classList.remove(
+            "lens-dot-beginner",
+            "lens-dot-intermediate",
+            "lens-dot-advanced",
+          );
           const level = getSectionLevel(link.dataset.section);
           if (level) dot.classList.add("lens-dot-" + level);
         }
@@ -76,7 +93,9 @@
   // ── Keyboard lens (focusin mirrors mouseenter, focusout mirrors mouseleave) ──
   links.forEach((link, i) => {
     link.addEventListener("focusin", () => {
-      links.forEach((l) => l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next"));
+      links.forEach((l) => {
+        l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next");
+      });
       link.classList.add("is-lens-current");
       if (i > 0) links[i - 1].classList.add("is-lens-prev");
       if (i < links.length - 1) links[i + 1].classList.add("is-lens-next");
@@ -84,7 +103,11 @@
       if (roadmapLink) {
         const dot = roadmapLink.querySelector(".lens-roadmap-dot");
         if (dot) {
-          dot.classList.remove("lens-dot-beginner", "lens-dot-intermediate", "lens-dot-advanced");
+          dot.classList.remove(
+            "lens-dot-beginner",
+            "lens-dot-intermediate",
+            "lens-dot-advanced",
+          );
           const level = getSectionLevel(link.dataset.section);
           if (level) dot.classList.add("lens-dot-" + level);
         }
@@ -94,24 +117,38 @@
   sidebar.addEventListener("focusout", () => {
     requestAnimationFrame(() => {
       if (sidebar.contains(document.activeElement)) return;
-      links.forEach((l) => l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next"));
+      links.forEach((l) => {
+        l.classList.remove("is-lens-current", "is-lens-prev", "is-lens-next");
+      });
       if (roadmapLink) {
         const dot = roadmapLink.querySelector(".lens-roadmap-dot");
-        if (dot) dot.classList.remove("lens-dot-beginner", "lens-dot-intermediate", "lens-dot-advanced");
+        if (dot)
+          dot.classList.remove(
+            "lens-dot-beginner",
+            "lens-dot-intermediate",
+            "lens-dot-advanced",
+          );
       }
     });
   });
 
   // ── Sidebar reveal ──
   let _rafId = 0;
-  document.addEventListener("mousemove", (e) => {
-    cancelAnimationFrame(_rafId);
-    _rafId = requestAnimationFrame(() => {
-      const sidebarLeft = Math.max(0, window.innerWidth / 2 - 530);
-      const sidebarRight = sidebarLeft + cachedSidebarW + 16;
-      sidebar.classList.toggle("is-nav-open", e.clientX >= sidebarLeft && e.clientX <= sidebarRight);
-    });
-  }, { passive: true });
+  document.addEventListener(
+    "mousemove",
+    (e) => {
+      cancelAnimationFrame(_rafId);
+      _rafId = requestAnimationFrame(() => {
+        const sidebarLeft = Math.max(0, window.innerWidth / 2 - 530);
+        const sidebarRight = sidebarLeft + cachedSidebarW + 16;
+        const nearEdge = e.clientX >= sidebarLeft && e.clientX <= sidebarRight;
+        if (nearEdge && sidebar.classList.contains("is-nav-open")) return;
+        if (!nearEdge && !sidebar.classList.contains("is-nav-open")) return;
+        sidebar.classList.toggle("is-nav-open", nearEdge);
+      });
+    },
+    { passive: true },
+  );
   document.addEventListener("mouseleave", () => {
     sidebar.classList.remove("is-nav-open");
   });
@@ -151,36 +188,53 @@
     }
   });
 
+  const linkMap = new Map(links.map((l) => [l.dataset.section, l]));
+
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((e) => {
-        const link = sidebar.querySelector(`a[data-section="${e.target.id}"]`);
-        if (link) link.classList.toggle("active", e.isIntersecting);
+      requestAnimationFrame(() => {
+        entries.forEach((e) => {
+          const link = linkMap.get(e.target.id);
+          if (link) link.classList.toggle("active", e.isIntersecting);
+        });
       });
     },
     { rootMargin: "-10% 0px -80% 0px" },
   );
 
-  sections.forEach((s) => observer.observe(s));
+  sections.forEach((s) => {
+    observer.observe(s);
+  });
   window._sectionObserver = observer;
 
-  const heartObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          heart.classList.add("drawn");
+  const heartEl = document.getElementById("heart");
+  if (heartEl) {
+    const heartObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          heartEl.classList.add("drawn");
+          heartObserver.disconnect();
         }
-      });
-    },
-    { threshold: 0.4 },
-  );
-  heartObserver.observe(heart);
+      },
+      { threshold: 0.4 },
+    );
+    heartObserver.observe(heartEl);
+  }
 
   const topBtn = document.getElementById("backToTop");
+  let _scrollRafId = 0;
+  let _topBtnVisible = false;
   window.addEventListener(
     "scroll",
     () => {
-      topBtn.classList.toggle("visible", window.scrollY > 500);
+      cancelAnimationFrame(_scrollRafId);
+      _scrollRafId = requestAnimationFrame(() => {
+        const shouldShow = window.scrollY > 500;
+        if (shouldShow !== _topBtnVisible) {
+          _topBtnVisible = shouldShow;
+          topBtn.classList.toggle("visible", shouldShow);
+        }
+      });
     },
     { passive: true },
   );
@@ -207,7 +261,7 @@
     localStorage.setItem("theme", isLight ? "" : "light");
   });
 
-  // ── Collapsible scenario cards ──
+  // Collapsible scenario cards
   document.querySelectorAll(".scenario-title").forEach((title) => {
     title.addEventListener("click", () => {
       const scenario = title.closest(".scenario");
@@ -225,7 +279,7 @@
     });
   });
 
-  // ── Collapse/Expand all toggle per section ──
+  // Collapse/Expand all toggle per section
   document.querySelectorAll(".section-header").forEach((header) => {
     const btn = document.createElement("button");
     btn.className = "section-toggle";
@@ -256,8 +310,8 @@
     header.appendChild(btn);
   });
 
-  // ── Copy buttons on code blocks ──
-  // ── Wrap all <pre> in .code-wrapper (fixes pinned buttons + scroll) ──
+  // Copy buttons on code blocks
+  // Wrap all <pre> in .code-wrapper (fixes pinned buttons + scroll)
   document.querySelectorAll("pre").forEach((pre) => {
     if (pre.parentElement.classList.contains("code-wrapper")) return;
     if (pre.parentElement.closest("pre")) return;
@@ -267,10 +321,10 @@
     wrapper.appendChild(pre);
   });
 
-  // ── Auto-wrap all tables in .table-scroll-wrapper ──
+  // Auto-wrap all tables in .table-scroll-wrapper
   document.querySelectorAll("table").forEach((table) => {
     if (table.closest(".table-scroll-wrapper")) return;
-    if (table.closest('[style*="overflow"]')) return;
+    if (table.closest("[style*='overflow']")) return;
     const wrapper = document.createElement("div");
     wrapper.className = "table-scroll-wrapper";
     table.parentNode.insertBefore(wrapper, table);
@@ -308,8 +362,61 @@
     pre.parentElement.appendChild(btn);
   });
 
-  // Overlay show/hide via data-overlay-* attributes (replaces inline onclick)
+  // Overlay show/hide via data-overlay-* attributes
   let lastFocusedElement = null;
+  const overlayIds = Array.from(
+    new Set(
+      Array.from(
+        document.querySelectorAll("[data-overlay-show],[data-overlay-hide]"),
+      ).flatMap((el) => [el.dataset.overlayShow, el.dataset.overlayHide]),
+    ),
+  ).filter(Boolean);
+
+  function getActiveOverlayElement() {
+    for (let i = overlayIds.length - 1; i >= 0; i -= 1) {
+      const el = document.getElementById(overlayIds[i]);
+      if (el && getComputedStyle(el).display !== "none") return el;
+    }
+    return null;
+  }
+
+  function getOverlayFocusableElements(overlay) {
+    return Array.from(
+      overlay.querySelectorAll(
+        'button, [href], input, [tabindex]:not([tabindex="-1"])',
+      ),
+    ).filter((el) => !el.hasAttribute("disabled"));
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (_overlayOpenCount <= 0) return;
+    const activeOverlay = getActiveOverlayElement();
+    if (!activeOverlay) return;
+    if (e.key === "Tab") {
+      const focusable = getOverlayFocusableElements(activeOverlay);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const isInsideOverlay = activeOverlay.contains(document.activeElement);
+      if (e.shiftKey) {
+        if (!isInsideOverlay || document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (!isInsideOverlay || document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+      return;
+    }
+    if (e.key !== "Escape") return;
+    e.preventDefault();
+    const hideBtn = activeOverlay.querySelector(
+      `[data-overlay-hide="${activeOverlay.id}"]:not([data-overlay-show])`,
+    );
+    if (hideBtn) hideBtn.click();
+  });
+
   document.addEventListener("click", function (e) {
     const btn = e.target.closest("[data-overlay-show],[data-overlay-hide]");
     if (!btn) return;
@@ -320,18 +427,33 @@
       lastFocusedElement = document.activeElement;
     }
 
-    if (toHide) {
-      const el = document.getElementById(toHide);
-      if (el) el.style.display = "none";
-    }
     if (toShow) {
       const el = document.getElementById(toShow);
       if (el) {
+        _overlayOpenCount += 1;
+        if (_overlayOpenCount === 1) {
+          savedScrollY = window.scrollY;
+          document.body.style.top = `-${savedScrollY}px`;
+          document.body.style.position = "fixed";
+          document.body.style.width = "100%";
+        }
         el.style.display = "flex";
-        const focusable = el.querySelector(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-        );
+        const focusable = getOverlayFocusableElements(el)[0];
         if (focusable) focusable.focus();
+      }
+    }
+
+    if (toHide) {
+      const el = document.getElementById(toHide);
+      if (el) {
+        el.style.display = "none";
+        if (_overlayOpenCount > 0) _overlayOpenCount -= 1;
+        if (_overlayOpenCount === 0) {
+          document.body.style.position = "";
+          document.body.style.top = "";
+          document.body.style.width = "";
+          window.scrollTo(0, savedScrollY);
+        }
       }
     }
 
@@ -341,14 +463,13 @@
     }
   });
 })();
-// ═══════════════════════════════════════════════════════════════════
+
 // PYTHON RUNNER — Web Worker + SharedArrayBuffer + Atomics
-// ═══════════════════════════════════════════════════════════════════
 (function () {
   "use strict";
 
   // Guard: SharedArrayBuffer requires cross-origin isolation (COOP + COEP headers).
-  // On first page load the Service Worker hasn't activated yet, so those headers
+  // On first page load the Service Worker hasn"t activated yet, so those headers
   // are absent. Bail out here — the SW registration below will reload the page
   // once the SW is active and headers are in effect.
   if (!window.crossOriginIsolated) {
@@ -358,19 +479,27 @@
     return;
   }
 
-  // ── SharedArrayBuffer setup ──────────────────────────────────────
-  // stdinSAB: Int32Array[2] → [0]=flag, [1]=byteLength
-  // dataSAB:  Uint8Array[65536] → raw UTF-8 bytes of user input
+  // SharedArrayBuffer setup
   const stdinSAB = new SharedArrayBuffer(8);
   const dataSAB = new SharedArrayBuffer(65536);
   const stdinView = new Int32Array(stdinSAB);
 
-  // ── Worker init ─────────────────────────────────────────────────
+  // Worker init
   let _worker = null;
   let _running = false;
   let _currentPre = null;
   let _currentBtn = null;
   let _inputPanel = null; // active input DOM element
+  let _resolveReady = null;
+  const readyPromise = new Promise((resolve) => {
+    _resolveReady = resolve;
+  });
+
+  function setRunButtonsEnabled(enabled) {
+    document.querySelectorAll(".run-btn").forEach((btn) => {
+      btn.disabled = !enabled;
+    });
+  }
 
   function getWorker() {
     if (_worker) return _worker;
@@ -391,15 +520,20 @@
     return _worker;
   }
 
-  // ── Accumulated output buffer (for interleaved stdout/input) ────
+  // Accumulated output buffer (for interleaved stdout/input)
   let _stdoutHtml = "";
 
-  // ── Worker message handler ───────────────────────────────────────
+  // Worker message handler
   function handleWorkerMessage(event) {
     const { type } = event.data;
 
     if (type === "ready") {
       toastHide();
+      setRunButtonsEnabled(true);
+      if (_resolveReady) {
+        _resolveReady();
+        _resolveReady = null;
+      }
       return;
     }
 
@@ -445,7 +579,7 @@
     }
   }
 
-  // ── Live output panel (shown during streaming stdout) ───────────
+  // Live output panel (shown during streaming stdout)
   let _livePanel = null;
 
   function ensureLivePanel() {
@@ -467,11 +601,12 @@
       </div>
       <div class="py-output-body" id="_live_body"></div>
     `;
-    _livePanel
+    const panel = _livePanel;
+    panel
       .querySelector(".py-output-close")
       .addEventListener("click", () => {
-        _livePanel.remove();
-        _livePanel = null;
+        panel.remove();
+        if (_livePanel === panel) _livePanel = null;
         if (_currentPre) _currentPre.parentElement.classList.remove("py-open");
       });
     _currentPre.parentElement.insertAdjacentElement("afterend", _livePanel);
@@ -484,7 +619,7 @@
     if (body) body.innerHTML = _stdoutHtml;
   }
 
-  // ── Input prompt (injected below live output during need_input) ──
+  // Input prompt (injected below live output during need_input)
   function showInputPrompt() {
     if (!_currentPre) return;
     ensureLivePanel();
@@ -533,7 +668,7 @@
     if (_worker) _worker.postMessage({ type: "interrupt" });
   }
 
-  // ── Finish run ──────────────────────────────────────────────────
+  // Finish run
   function finishRun(images) {
     toastHide();
     removeInputPanel();
@@ -547,7 +682,7 @@
 
     if (!html.trim()) {
       html =
-        '<span style="color:var(--muted);font-style:italic">✓ ran — no output</span>';
+        "<span style='color:var(--muted);font-style:italic'>✓ ran — no output</span>";
     }
 
     if (_currentPre) {
@@ -577,11 +712,11 @@
     _currentBtn = null;
   }
 
-  // ── Toast helper ─────────────────────────────────────────────────
+  // Toast helper
   const toast = document.createElement("div");
   toast.id = "py-toast";
   toast.innerHTML =
-    '<div class="py-spinner"></div><span id="py-toast-msg"></span>';
+    "<div class='py-spinner'></div><span id='py-toast-msg'></span>";
   document.body.appendChild(toast);
 
   function toastShow(msg) {
@@ -592,14 +727,16 @@
     toast.classList.remove("on");
   }
 
-  // ── Code text extraction ─────────────────────────────────────────
+  // Code text extraction
   function getCode(pre) {
     const clone = pre.cloneNode(true);
-    clone.querySelectorAll("button").forEach((b) => b.remove());
+    clone.querySelectorAll("button").forEach((b) => {
+      b.remove();
+    });
     return clone.textContent.trim();
   }
 
-  // ── Pre-processing ───────────────────────────────────────────────
+  // Pre-processing
   function preprocessCode(code) {
     return code
       .split("\n")
@@ -674,7 +811,7 @@
     return defs.length ? defs.join("\n") + "\n" + code : code;
   }
 
-  // ── Code type detection ──────────────────────────────────────────
+  // Code type detection
   function detectType(raw) {
     const lines = raw
       .split("\n")
@@ -688,18 +825,18 @@
     if (/matplotlib|plt\./.test(raw)) return "matplotlib";
     if (/from\s+scipy|import\s+scipy/.test(raw)) return "scipy";
     if (/import\s+pandas|\bpd\./.test(raw)) return "pandas";
-    if (/open\s*\(\s*['"][^'"]+\.(txt|csv)['"]/.test(raw)) return "fileio";
+    if (/open\s*\(\s*[""][^""]+\.(txt|csv)[""]/.test(raw)) return "fileio";
     return "simple";
   }
 
-  // ── DOM panel helpers ────────────────────────────────────────────
+  // DOM panel helpers
   function esc(s) {
     return String(s)
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
+      .replace(/"/g, "&#39;");
   }
 
   function clearBelow(pre) {
@@ -789,9 +926,9 @@
     form.querySelector("input")?.focus();
   }
 
-  // ── Core execution ───────────────────────────────────────────────
-  function execCode(pre, btn, code) {
-    if (_running) return; // one execution at a time
+  // Core execution
+  async function execCode(pre, btn, code) {
+    if (_running) return;
     _running = true;
     _currentPre = pre;
     _currentBtn = btn;
@@ -806,10 +943,11 @@
     code = addContext(code);
 
     const worker = getWorker();
+    await readyPromise;
     worker.postMessage({ type: "run", code });
   }
 
-  // ── Per-type handlers ────────────────────────────────────────────
+  // Per-type handlers
   function handleShell(pre) {
     showOutput(
       pre,
@@ -823,7 +961,7 @@
       pre,
       "info",
       "Turtle graphics require a local Python window.\n" +
-        "This snippet shows the correct loop-based drawing logic — run it in your Python installation!",
+        "This snippet shows the correct loop-based drawing logic — run it in your Python environment!",
     );
   }
 
@@ -842,7 +980,7 @@
       hints[1] = "speed1 e.g. 60";
       hints[2] = "speed2 e.g. 80";
       hints[3] = "distance e.g. 100";
-      hints[4] = '"towards" or "pursue"';
+      hints[4] = "'towards' or 'pursue'";
     }
 
     const fields = indices
@@ -873,7 +1011,7 @@
     );
   }
 
-  // ── Main click dispatcher ────────────────────────────────────────
+  // Main click dispatcher
   function handleClick(pre, btn) {
     if (_running && btn === _currentBtn) {
       interruptRun();
@@ -910,12 +1048,13 @@
     execCode(pre, btn, raw);
   }
 
-  // ── Inject run buttons ───────────────────────────────────────────
+  // Inject run buttons
   document.querySelectorAll("pre").forEach((pre) => {
     if (pre.parentElement.closest("pre")) return;
     const btn = document.createElement("button");
     btn.className = "run-btn";
     btn.textContent = "▶ run";
+    btn.disabled = true;
     btn.setAttribute("aria-label", "Run Python code");
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -924,13 +1063,13 @@
     pre.parentElement.appendChild(btn);
   });
 
-  // ── Warm up worker on load ───────────────────────────────────────
+  // Warm up worker on load
   window.addEventListener("load", () => {
     setTimeout(() => getWorker(), 1500);
   });
 })();
 
-// ── Service Worker registration + cross-origin isolation reload guard ──────
+// Service Worker registration + cross-origin isolation reload guard
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker

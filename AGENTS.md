@@ -72,9 +72,9 @@ The site uses `SharedArrayBuffer` and `Atomics` to allow the Python `input()` fu
 - **Key rule**: never overrides user-assigned variables.
 
 ### 3. Service Worker & Caching
-- **Cache Name**: Currently `python-guide-v6`. Update this when making breaking changes to assets.
+- **Cache Name**: Currently `python-guide-v9`. Update this when making breaking changes to assets.
 - **Offline Support**: Cache-first strategy for tutorial content.
-- **ASSETS_TO_CACHE**: `/index.html`, `/style.css`, `/runner.js`, `/manifest.json`, `/pyodide-worker.js`.
+- **ASSETS_TO_CACHE**: `/index.html`, `/style.css`, `/runner.js`, `/manifest.json`, `/pyodide-worker.js`, `/favicon.png?v=5`.
 - **CDN bypass**: `cdn.jsdelivr.net`, `fonts.googleapis.com`, `fonts.gstatic.com` are NOT intercepted.
 - **COOP/COEP injection**: `addIsolationHeaders()` sets `COEP: require-corp` + `COOP: same-origin`.
 - **Lifecycle**: Install → `skipWaiting` + precache. Activate → delete old caches + `clients.claim()`.
@@ -120,6 +120,7 @@ The sidebar navigation (`.sidebar-nav`) reveals on `mousemove` near the left edg
 - Uses `e.target.closest("[data-overlay-show],[data-overlay-hide]")`.
 - Overlay attributes: `data-overlay-show="<id>"` and `data-overlay-hide="<id>"`.
 - Focus management: saves `lastFocusedElement`, restores on close.
+- **Escape key convention**: Every overlay that should close on Escape **must** include at least one pure-close button — an element with `data-overlay-hide="<id>"` but **without** `data-overlay-show`. The Escape handler uses `querySelector('[data-overlay-hide="…"]:not([data-overlay-show])')` to target it. Back buttons carry both attributes and are intentionally skipped. If an overlay has only Back-style controls and no pure-close button, Escape will silently do nothing.
 
 ### CSS
 - **Theming**: Use CSS Custom Properties.
@@ -155,6 +156,56 @@ The sidebar navigation (`.sidebar-nav`) reveals on `mousemove` near the left edg
 - **Naming**: `snake_case`.
 - **Dependencies**: Standard library only.
 - **Header**: Include `#!/usr/bin/env python3` and module docstring.
+
+## Version Coupling Reference
+
+Several version numbers are **coupled across multiple files**. Changing one without the others causes cache misses, stale assets, or broken offline support. Always update all coupled locations in the same commit.
+
+### 1. Service Worker Cache Name — `CACHE_NAME`
+| Location | What to change |
+|---|---|
+| `sw.js` → `const CACHE_NAME` | Increment `vN` → `v(N+1)` |
+| `AGENTS.md` → §3 Cache Name note | Update the version number here too |
+
+**When to bump**: Any time you modify `ASSETS_TO_CACHE` entries OR change any cached asset file (`index.html`, `style.css`, `runner.js`, `pyodide-worker.js`, `manifest.json`, `favicon.png`). This forces all clients to discard the old cache and re-fetch.
+
+### 2. Favicon Cache-Bust Query String — `?vN`
+| Location | What to change |
+|---|---|
+| `index.html` → `<link rel="icon" href="favicon.png?vN">` | Increment N |
+| `sw.js` → `ASSETS_TO_CACHE` → `/favicon.png?vN` | Must match index.html exactly |
+
+**When to bump**: When the favicon image itself changes. Both files must use the identical query string or the SW will never serve the favicon offline (cache key mismatch). After changing, also bump `CACHE_NAME`.
+
+### 3. Pyodide Version + SRI Hash
+| Location | What to change |
+|---|---|
+| `index.html` → `<script src="cdn.jsdelivr.net/.../pyodide.js"` | Version path segment + `integrity` SRI hash |
+| `pyodide-worker.js` → `importScripts("cdn.jsdelivr.net/.../pyodide.js")` (line 4) | Version path segment (no SRI — must match exactly) |
+| `pyodide-worker.js` → `indexURL: "cdn.jsdelivr.net/.../full/"` (line 43) | Version path segment |
+| `AGENTS.md` → §2 Python Execution note | Update version string |
+
+**When to bump**: When upgrading Pyodide. All three version strings must be identical or the worker will load a different Pyodide version than the main thread — silent breakage, no error thrown. The SRI `integrity` hash in `index.html` must match the new file exactly — get it from the Pyodide release notes or compute via `openssl dgst -sha384 -binary pyodide.js | openssl base64 -A`. The `importScripts` call in `pyodide-worker.js` has **no** integrity check, so a version mismatch there fails silently.
+
+### 4. Font Preload WOFF2 URLs
+| Location | What to change |
+|---|---|
+| `index.html` lines 51–53 → 3× `<link rel="preload" as="font" href="https://fonts.gstatic.com/s/firacode/...">`  | All three Fira Code WOFF2 URLs |
+| `index.html` line 54 → `<link rel="preload" as="font" href="https://fonts.gstatic.com/s/dancingscript/...">` | The Dancing Script WOFF2 URL |
+
+**When to bump**: When the `preload-not-used` console warning reappears, it means Google Fonts changed their CDN URL. Fix: fetch `https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap` with a Chrome User-Agent, extract the `src: url(...)` WOFF2 value from the response, and replace the hardcoded `href`. Repeat for Fira Code (`family=Fira+Code:wght@400;500`) — there are **three** WOFF2 entries for Fira Code (different subsets). Do **not** guess — fetch the live CSS to get the real URLs.
+
+### 5. runner.js and style.css — No Direct Versioning
+These files have **no version query string** and are not referenced by any integrity hash. Versioning is handled entirely by `CACHE_NAME` in `sw.js`. When you modify either file, only bump `CACHE_NAME` — nothing else needs changing.
+### 6. Quick Coupling Checklist
+
+| Change | Files to touch |
+|---|---|
+| Favicon image updated | `index.html` (bump `?vN`), `sw.js` (match query string + bump `CACHE_NAME`), `AGENTS.md` |
+| Any cached asset modified (`index.html`, `style.css`, `runner.js`, `pyodide-worker.js`, `manifest.json`) | `sw.js` (bump `CACHE_NAME`), `AGENTS.md` |
+| Pyodide version upgrade | `index.html` (version + SRI hash), `pyodide-worker.js` (line 4 `importScripts` + line 43 `indexURL`), `AGENTS.md` |
+| Font CDN URL changed | `index.html` (all 4 WOFF2 preload hrefs — 3× Fira Code + 1× Dancing Script) |
+| manifest.json icons changed (`icon-192.png`, `icon-512.png`) | `manifest.json` only — icons are **not** in `ASSETS_TO_CACHE` and will not be served offline |
 
 ## Implementation Checklist for Agents
 1. [ ] Verify changes with `python3 serve.py`.

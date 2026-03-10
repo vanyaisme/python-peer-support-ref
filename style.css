@@ -736,6 +736,7 @@ td code {
   left: max(0px, calc(50% - 530px));
   top: 50%;
   transform: translateX(-100%) translateY(-50%);
+  will-change: transform, opacity;
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -841,6 +842,7 @@ td code {
   position: fixed;
   bottom: 28px;
   right: max(8px, calc(50% - 550px));
+  will-change: opacity, transform;
   width: 38px;
   height: 38px;
   border-radius: 10px;
@@ -1650,6 +1652,14 @@ ul, ol {
    Overlay landing shared styles
    ──────────────────────────────────────── */
 
+#challenges-landing,
+#answers-landing,
+#answers-pip-overlay,
+#answers-exercises-overlay {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* H1 — clean, bold, no gradient */
 .overlay-h1 {
   font-size: 1.6rem;
@@ -1782,3 +1792,25 @@ pre[class*="language-"] > code {
 [data-theme="light"] .token.comment    { color: #9a9080; font-style: italic; }
 [data-theme="light"] .token.operator   { color: #0e7490; }
 [data-theme="light"] .token.punctuation { color: var(--text); }
+
+/* ── Print Overlays ── */
+@media print {
+  #challenges-landing,
+  #answers-landing,
+  #answers-pip-overlay,
+  #answers-exercises-overlay {
+    display: none !important;
+  }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
