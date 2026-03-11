@@ -290,6 +290,7 @@
   const topBtn = document.getElementById("backToTop");
   let _scrollRafId = 0;
   let _topBtnVisible = false;
+  let _floatingBtnVisible = false;
   window.addEventListener(
     "scroll",
     () => {
@@ -299,6 +300,10 @@
         if (topBtn && shouldShow !== _topBtnVisible) {
           _topBtnVisible = shouldShow;
           topBtn.classList.toggle("visible", shouldShow);
+        }
+        if (floatingThemeBtn && shouldShow !== _floatingBtnVisible) {
+          _floatingBtnVisible = shouldShow;
+          floatingThemeBtn.classList.toggle("visible", shouldShow);
         }
         const lastSec = sections[sections.length - 1];
         if (lastSec && sidebar) {
@@ -330,13 +335,32 @@
       "aria-pressed",
       document.documentElement.dataset.theme !== "light" ? "true" : "false",
     );
+  const floatingThemeBtn = document.getElementById("floatingThemeToggle");
+  if (floatingThemeBtn)
+    floatingThemeBtn.setAttribute(
+      "aria-pressed",
+      document.documentElement.dataset.theme !== "light" ? "true" : "false",
+    );
 
   if (themeBtn)
     themeBtn.addEventListener("click", () => {
       const isLight = document.documentElement.dataset.theme === "light";
-
       document.documentElement.dataset.theme = isLight ? "" : "light";
       themeBtn.setAttribute("aria-pressed", isLight ? "true" : "false");
+      if (floatingThemeBtn)
+        floatingThemeBtn.setAttribute(
+          "aria-pressed",
+          isLight ? "true" : "false",
+        );
+      localStorage.setItem("theme", isLight ? "" : "light");
+    });
+
+  if (floatingThemeBtn)
+    floatingThemeBtn.addEventListener("click", () => {
+      const isLight = document.documentElement.dataset.theme === "light";
+      document.documentElement.dataset.theme = isLight ? "" : "light";
+      floatingThemeBtn.setAttribute("aria-pressed", isLight ? "true" : "false");
+      if (themeBtn) themeBtn.setAttribute("aria-pressed", isLight ? "true" : "false");
       localStorage.setItem("theme", isLight ? "" : "light");
     });
 

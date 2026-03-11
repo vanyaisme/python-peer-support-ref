@@ -358,9 +358,9 @@ print("Participant P01 responded in 423 ms")</code></pre>
 python helloworld.py</code></pre>
           <div class="warn">
             ⚠️ <span class="inline-code">print()</span> is case-sensitive — Python treats uppercase and lowercase letters as different characters.
-            <span class="inline-code">Print()</span> and
+            <p><span class="inline-code">Print()</span> and
             <span class="inline-code">PRINT()</span> will crash — Python only
-            recognises lowercase <span class="inline-code">print</span>.
+            recognises lowercase <span class="inline-code">print</span>.</p></div>
           </div>
         </div>
       </div>
@@ -10291,8 +10291,7 @@ turtle.done()</code></pre>
               <span class="badge badge-purple">PIP 1 — Weber's Fraction predictor</span>
             </div>
             <div class="scenario-body">
-              <pre><code class="language-python">
-import sys
+              <pre><code class="language-python">import sys
 
 # Part 1: Calculate Weber's Fraction from two measured stimuli
 s1 = float(sys.argv[1])
@@ -10304,11 +10303,41 @@ print("Weber's Fraction C =", c)
 # Part 2: Predict S2 from S1 using C
 predicted_s2 = s1 + s1 * c
 print("Predicted S2 =", predicted_s2)</code></pre>
-              <p>
-                Two-part program: Part 1 computes Weber's Fraction
-                <span class="inline-code">C = |S2-S1| / S1</span>
-                from two measured stimuli; Part 2 predicts a new S2 from S1 using that fraction.
-              </p>
+              <div class="scenario sol-scenario collapsed">
+                <div class="scenario-title" role="button" tabindex="0" aria-expanded="false">
+                  Code walkthrough
+                </div>
+                <div class="scenario-body">
+                  <ul>
+                    <li>
+                      <span class="inline-code">sys.argv[1]</span>,
+                      <span class="inline-code">sys.argv[2]</span> — read two stimulus values
+                      from the command line and convert them to decimals with
+                      <span class="inline-code">float()</span> so we can do arithmetic with them.
+                    </li>
+                    <li>
+                      <span class="inline-code">abs(s2 - s1) / s1</span> — calculate Weber's
+                      Fraction <span class="inline-code">C</span>.
+                      <span class="inline-code">abs()</span> ensures the difference is always
+                      positive regardless of which stimulus is larger. Dividing by
+                      <span class="inline-code">S1</span> gives the proportional change.
+                    </li>
+                    <li>
+                      <span class="inline-code">s1 + s1 * c</span> — predict a new
+                      <span class="inline-code">S2</span> by scaling
+                      <span class="inline-code">S1</span> up by the fraction we just calculated.
+                      This is the inverse of the formula: if we know
+                      <span class="inline-code">C</span> and
+                      <span class="inline-code">S1</span>, we can work out what
+                      <span class="inline-code">S2</span> should be.
+                    </li>
+                    <li>
+                      <span class="inline-code">print()</span> — output both the computed
+                      fraction and the predicted value.
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -10318,8 +10347,7 @@ print("Predicted S2 =", predicted_s2)</code></pre>
               <span class="badge badge-purple">PIP 2 — Spelling practice program</span>
             </div>
             <div class="scenario-body">
-              <pre><code class="language-python">
-words = ["apple", "banana", "cherry", "dog", "cat"]
+              <pre><code class="language-python">words = ["apple", "banana", "cherry", "dog", "cat"]
 
 score = 0
 for word in words:
@@ -10339,16 +10367,44 @@ elif percentage >= 50:
     print("Good job!")
 else:
     print("Keep practising!")</code></pre>
-              <p>
-                We define a list of words to practice with and a <span class="inline-code">score</span>
-                counter starting at zero. Then we loop through every word — displaying it on screen and
-                asking the child to type it. If the answer matches the word exactly, we print
-                <span class="inline-code">Correct!</span> and increment the score, otherwise we reveal
-                the correct spelling. After the loop, we calculate the percentage of correct answers by
-                dividing <span class="inline-code">score</span> by the total number of words and
-                multiplying by 100. That percentage then determines which of the three feedback messages
-                is printed.
-              </p>
+              <div class="scenario sol-scenario collapsed">
+                <div class="scenario-title" role="button" tabindex="0" aria-expanded="false">
+                  Code walkthrough
+                </div>
+                <div class="scenario-body">
+                  <ul>
+                    <li>
+                      <span class="inline-code">words = [...]</span> and
+                      <span class="inline-code">score = 0</span> — define the list of words
+                      to practice with and set the score counter to zero before the
+                      loop begins.
+                    </li>
+                    <li>
+                      <span class="inline-code">for word in words:</span> — loop through
+                      every word in the list. Each iteration displays the word on
+                      screen and waits for the child to type it back using
+                      <span class="inline-code">input()</span>.
+                    </li>
+                    <li>
+                      <span class="inline-code">if answer == word:</span> — compare the
+                      typed answer to the original word exactly. A match prints
+                      “Correct!” and adds one to the score; a mismatch reveals the
+                      correct spelling.
+                    </li>
+                    <li>
+                      <span class="inline-code">score / len(words) * 100</span> — after
+                      the loop, calculate the percentage of correct answers by
+                      dividing the score by the total number of words and multiplying
+                      by 100.
+                    </li>
+                    <li>
+                      <span class="inline-code">if percentage >= 80:</span> — three-tier
+                      feedback: 80 % or above prints “Excellent!”, 50–79 % prints
+                      “Good job!”, and below 50 % prints “Keep practising!”.
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -10358,8 +10414,7 @@ else:
               <span class="badge badge-purple">PIP 3 — Vehicle Chase</span>
             </div>
             <div class="scenario-body">
-              <pre><code class="language-python">
-def validate(prompt):
+              <pre><code class="language-python">def validate(prompt):
     while True:
         value = input(prompt)
         if not value.isdigit():
@@ -10396,21 +10451,59 @@ elif scenario == "pursue":
         print("The first vehicle passed", speed1 * time, "meters before catching up")
 else:
     print("Unknown scenario")</code></pre>
-              <p>
-                We define two functions: <span class="inline-code">validate()</span> loops until the user
-                enters a valid non-negative number, using <span class="inline-code">isdigit()</span> to
-                check if the input is numeric before converting it. <span class="inline-code">calc_time()</span>
-                takes <span class="inline-code">distance</span>, <span class="inline-code">speed1</span>,
-                <span class="inline-code">speed2</span> and <span class="inline-code">scenario</span> as
-                parameters and returns the time based on the scenario — dividing by the sum of speeds for
-                <span class="inline-code">towards</span>, or by the difference for
-                <span class="inline-code">pursue</span>. After collecting all inputs, we check the
-                scenario: for <span class="inline-code">towards</span> we guard against both vehicles
-                being stationary, and for <span class="inline-code">pursue</span> we check that the
-                pursuer is actually faster — otherwise they can never catch up. If the conditions are
-                met, we call <span class="inline-code">calc_time()</span> and print both the time and
-                distance travelled.
-              </p>
+              <div class="scenario sol-scenario collapsed">
+                <div class="scenario-title" role="button" tabindex="0" aria-expanded="false">
+                  Code walkthrough
+                </div>
+                <div class="scenario-body">
+                  <ul>
+                    <li>
+                      <span class="inline-code">validate(prompt)</span> — a helper function
+                      that keeps asking until the user enters a valid non-negative number.
+                      <span class="inline-code">isdigit()</span> checks if the input contains
+                      only digits, and
+                      <span class="inline-code">int(value) &lt; 0</span> rejects negative values.
+                      Once valid, it returns the number as an integer.
+                    </li>
+                    <li>
+                      <span class="inline-code">calc_time(distance, speed1, speed2, scenario)</span>
+                      — computes the meeting time. For
+                      <span class="inline-code">"towards"</span> it divides distance by the
+                      sum of both speeds (vehicles closing in from opposite sides). For
+                      <span class="inline-code">"pursue"</span> it divides by the difference
+                      (the pursuer must be faster to close the gap).
+                    </li>
+                    <li>
+                      <span class="inline-code">validate()</span> is called three times to
+                      collect
+                      <span class="inline-code">speed1</span>,
+                      <span class="inline-code">speed2</span>, and
+                      <span class="inline-code">distance</span>. The scenario is read with a
+                      plain <span class="inline-code">input()</span> since it is a text choice,
+                      not a number.
+                    </li>
+                    <li>
+                      <span class="inline-code">if scenario == "towards":</span> — first
+                      checks whether both speeds are zero (stationary vehicles can never
+                      meet). If not, calls
+                      <span class="inline-code">calc_time()</span> and prints the time and how
+                      far the first vehicle travelled.
+                    </li>
+                    <li>
+                      <span class="inline-code">elif scenario == "pursue":</span> — checks
+                      whether the pursuer is actually faster
+                      (<span class="inline-code">speed1 &gt; speed2</span>). If the pursuer is
+                      equally fast or slower, they will never catch up. Otherwise,
+                      calculates and prints the time and distance.
+                    </li>
+                    <li>
+                      <span class="inline-code">else:</span> — catches any input that is
+                      neither <span class="inline-code">"towards"</span> nor
+                      <span class="inline-code">"pursue"</span> and prints an error message.
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -10420,8 +10513,7 @@ else:
               <span class="badge badge-purple">PIP 4 — EEG Correlation</span>
             </div>
             <div class="scenario-body">
-              <pre><code class="language-python">
-import sys
+              <pre><code class="language-python">import sys
 import csv
 import matplotlib.pyplot as plt
 from scipy.stats import pearsonr
@@ -10452,36 +10544,53 @@ plt.show()
 # 3. Compute and print correlation
 r, p = pearsonr(eeg[ch_a_idx], eeg[ch_b_idx])
 print(f"r = {r:.3f}, p = {p:.3f}")</code></pre>
-              <p>
-                We start by reading the filename and two channel numbers from the command line.
-                The channel numbers are converted to integers and reduced by one because the user
-                enters a number between 1 and 8, but Python lists start at index 0 — so channel 1
-                becomes index 0, channel 8 becomes index 7.
-              </p>
-              <p>
-                Next we prepare <span class="inline-code">eeg</span> — a list containing 8 empty lists,
-                one for each EEG channel. We then open the file and read it line by line using
-                <span class="inline-code">csv.reader()</span> with a space as delimiter, so each row
-                is split into individual values. For every value in a row, we convert it to a decimal
-                using <span class="inline-code">float()</span> and append it to the corresponding
-                channel list inside <span class="inline-code">eeg</span>. After the loop, each of the
-                8 inner lists contains all 512 recorded measurements for that channel.
-              </p>
-              <p>
-                With the data loaded, we plot the two selected channels. Each channel gets its own
-                <span class="inline-code">figure()</span> call so they appear as separate graphs, and
-                a <span class="inline-code">title()</span> is added showing which channel is displayed.
-                We add 1 back when displaying the title so the user sees the original channel number
-                they entered, not the zero-based index.
-              </p>
-              <p>
-                Finally, we pass the two selected channel lists to <span class="inline-code">pearsonr()</span>
-                which computes how strongly the two channels correlate with each other. It returns two
-                values: <span class="inline-code">r</span>, the correlation coefficient indicating the
-                strength and direction of the relationship, and <span class="inline-code">p</span>, the
-                p-value indicating whether that correlation is statistically significant. Both are
-                printed to the screen.
-              </p>
+              <div class="scenario sol-scenario collapsed">
+                <div class="scenario-title" role="button" tabindex="0" aria-expanded="false">
+                  Code walkthrough
+                </div>
+                <div class="scenario-body">
+                  <ul>
+                    <li>
+                      <span class="inline-code">sys.argv[1]</span>, <span class="inline-code">sys.argv[2]</span>,
+                      <span class="inline-code">sys.argv[3]</span> — read the filename and two channel
+                      numbers from the command line. Channel numbers are converted to integers and reduced
+                      by one because the user enters 1–8, but Python lists start at index 0 — so channel 1
+                      becomes index 0, channel 8 becomes index 7.
+                    </li>
+                    <li>
+                      <span class="inline-code">eeg = [[] for _ in range(8)]</span> — create eight empty
+                      lists, one for each EEG channel. This will hold all the measurements once we read the file.
+                    </li>
+                    <li>
+                      <span class="inline-code">open(filename, "r")</span> — open the data file for reading.
+                      <span class="inline-code">csv.reader()</span> splits each line on spaces so we get
+                      individual values instead of one long string.
+                    </li>
+                    <li>
+                      <span class="inline-code">for row in reader:</span> — walk through every row in the
+                      file. For each value in the row, convert it to a decimal with
+                      <span class="inline-code">float()</span> and append it to the corresponding channel
+                      list inside <span class="inline-code">eeg</span>. After all rows are processed, each
+                      of the 8 lists contains 512 measurements.
+                    </li>
+                    <li>
+                      <span class="inline-code">plt.figure()</span>,
+                      <span class="inline-code">plt.plot()</span> — plot each of the two selected channels
+                      in its own separate graph. <span class="inline-code">plt.title()</span> adds a label —
+                      we add 1 back to the index so the title shows the original channel number the user
+                      entered, not the zero-based index.
+                    </li>
+                    <li>
+                      <span class="inline-code">pearsonr()</span> — takes the two selected channel lists
+                      and computes how strongly they correlate. It returns two values:
+                      <span class="inline-code">r</span>, the correlation coefficient indicating the strength
+                      and direction of the relationship, and <span class="inline-code">p</span>, the p-value
+                      indicating whether that correlation is statistically significant. Both are printed to
+                      three decimal places.
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -10542,6 +10651,21 @@ print(f"r = {r:.3f}, p = {p:.3f}")</code></pre>
     <nav class="sidebar-nav" id="sidebarNav"></nav>
     <button type="button" class="back-to-top" id="backToTop" title="Back to top" aria-label="Back to top">
       ↑
+    </button>
+    <button type="button" class="floating-theme-toggle" id="floatingThemeToggle" title="Toggle theme" aria-label="Toggle dark/light theme"
+      aria-pressed="true">
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+        stroke="currentColor">
+        <title>Sun icon</title>
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+      </svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+        stroke="currentColor">
+        <title>Moon icon</title>
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+      </svg>
     </button>
 
     <script src="runner.js" defer></script>
