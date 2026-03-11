@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/jsconfig",
+  "compilerOptions": {
+    // Target ES2022 to match what the project actually uses:
+    // SharedArrayBuffer, Atomics, Promise.allSettled, optional chaining, ??
+    "target": "ES2022",
+
+    // DOM     → window, document, fetch, Headers, URL, localStorage …
+    // WebWorker → self, importScripts, Atomics, TextDecoder, postMessage …
+    // Both libs coexist fine; every file gets full IntelliSense for its environment.
+    "lib": ["ES2022", "DOM", "DOM.Iterable", "WebWorker"],
+
+    // No type errors — project is untyped vanilla JS.
+    // Change to true when you want the LSP to flag type mistakes.
+    "checkJs": false,
+
+    // Never emit compiled output.
+    "noEmit": true
+  },
+
+  // Only the three JS files in the project root — nothing else to include.
+  "include": ["*.js"]
+}
