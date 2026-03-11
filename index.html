@@ -6631,8 +6631,19 @@ print(calculate_mean(rt_ms))</code></pre>
         steps += 1
     return steps
 
-print(collatz_steps(6))   # 8
-print(collatz_steps(27))  # 111</code></pre>
+print(collatz_steps(6))    # 8
+print(collatz_steps(27))   # 111
+
+# Find which number under 1000 produces the longest sequence
+longest = 0
+longest_n = 0
+for i in range(1, 1000):
+    steps = collatz_steps(i)
+    if steps > longest:
+        longest = steps
+        longest_n = i
+
+print("Longest sequence under 1000: number", longest_n, "with", longest, "steps")</code></pre>
                 </div>
               </div>
             </div>
@@ -6657,12 +6668,13 @@ print(collatz_steps(27))  # 111</code></pre>
                 </div>
                 <div class="scenario-body">
                   <pre><code class="language-python">def digital_root(n):
-    while n &gt;= 10:
-        n = sum(int(d) for d in str(n))
-    return n
-
-print(digital_root(493))   # 7
-print(digital_root(9999))  # 9</code></pre>
+    while n >= 10:
+        total = 0
+        while n > 0:
+            total += n % 10
+            n = n // 10
+        n = total
+    return n</code></pre>
                 </div>
               </div>
             </div>
@@ -6689,10 +6701,29 @@ print(digital_root(9999))  # 9</code></pre>
                   <pre><code class="language-python">def number_pyramid(n):
     width = 2 * n - 1
     for i in range(1, n + 1):
-        row = " ".join(str(j) for j in range(1, i + 1))
+        row = ""
+        for j in range(1, i + 1):
+            row += str(j)
         print(row.center(width))
 
-number_pyramid(5)</code></pre>
+def number_diamond(n):
+    width = 2 * n - 1
+    # Ascending
+    for i in range(1, n + 1):
+        row = ""
+        for j in range(1, i + 1):
+            row += str(j)
+        print(row.center(width))
+    # Descending
+    for i in range(n - 1, 0, -1):
+        row = ""
+        for j in range(1, i + 1):
+            row += str(j)
+        print(row.center(width))
+
+number_pyramid(5)
+print("---")
+number_diamond(5)</code></pre>
                 </div>
               </div>
             </div>
@@ -6723,7 +6754,21 @@ number_pyramid(5)</code></pre>
     elif i % 5 == 0:
         print("Buzz")
     else:
-        print(i)</code></pre>
+        print(i)
+
+# Generalised version
+def fizzbuzz(limit, div1, word1, div2, word2):
+    for i in range(1, limit + 1):
+        if i % div1 == 0 and i % div2 == 0:
+            print(word1 + word2)
+        elif i % div1 == 0:
+            print(word1)
+        elif i % div2 == 0:
+            print(word2)
+        else:
+            print(i)
+
+fizzbuzz(20, 3, "Fizz", 5, "Buzz")</code></pre>
                 </div>
               </div>
             </div>
@@ -6745,23 +6790,24 @@ number_pyramid(5)</code></pre>
                   💡 Solution
                 </div>
                 <div class="scenario-body">
-                  <pre><code class="language-python">def to_celsius(value, unit):
-    if unit == "F":
-        return (value - 32) * 5 / 9
-    elif unit == "K":
-        return value - 273.15
-    return value
+                  <pre><code class="language-python">def celsius_to_fahrenheit(c):
+    return c * 9 / 5 + 32
 
-def convert(value, from_unit, to_unit):
-    c = to_celsius(value, from_unit)
-    if to_unit == "F":
-        return c * 9 / 5 + 32
-    elif to_unit == "K":
-        return c + 273.15
-    return c
+def celsius_to_kelvin(c):
+    return c + 273.15
 
-print(convert(100, "C", "F"))  # 212.0
-print(convert(32, "F", "C"))   # 0.0</code></pre>
+c = 100
+print("Celsius:", c)
+print("Fahrenheit:", celsius_to_fahrenheit(c))
+print("Kelvin:", celsius_to_kelvin(c))
+
+# Full conversion table from -40 to 120 in steps of 10
+print("\nCelsius   Fahrenheit   Kelvin")
+print("-" * 30)
+temp = -40
+while temp <= 120:
+    print(temp, "       ", celsius_to_fahrenheit(temp), "     ", celsius_to_kelvin(temp))
+    temp += 10</code></pre>
                 </div>
               </div>
             </div>
@@ -6784,15 +6830,21 @@ print(convert(32, "F", "C"))   # 0.0</code></pre>
                   💡 Solution
                 </div>
                 <div class="scenario-body">
-                  <pre><code class="language-python">def hanoi(n, source, target, auxiliary):
+                  <pre><code class="language-python">move_count = 0
+
+def hanoi(n, source, target, auxiliary):
+    global move_count
     if n == 1:
-        print(f"Move disk 1 from {source} to {target}")
+        print("Move disk 1 from", source, "to", target)
+        move_count += 1
         return
     hanoi(n - 1, source, auxiliary, target)
-    print(f"Move disk {n} from {source} to {target}")
+    print("Move disk", n, "from", source, "to", target)
+    move_count += 1
     hanoi(n - 1, auxiliary, target, source)
 
-hanoi(3, "A", "C", "B")</code></pre>
+hanoi(3, "A", "C", "B")
+print("Total moves:", move_count, "— expected:", 2**3 - 1)</code></pre>
                 </div>
               </div>
             </div>
