@@ -14,7 +14,21 @@ const ASSETS_TO_CACHE = [
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE)),
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      const results = await Promise.allSettled(
+        ASSETS_TO_CACHE.map((url) => cache.add(url)),
+      );
+      results.forEach((result, index) => {
+        if (result.status === "rejected") {
+          console.warn(
+            "[sw] Failed to precache:",
+            ASSETS_TO_CACHE[index],
+            result.reason,
+          );
+        }
+      });
+    })(),
   );
   self.skipWaiting();
 });
@@ -36,6 +50,10 @@ self.addEventListener("activate", (event) => {
 
 // Add COOP/COEP headers required for SharedArrayBuffer (Web Worker + Atomics)
 function addIsolationHeaders(response) {
+  if (!response || response.type === "opaque") {
+    return response;
+  }
+
   const headers = new Headers(response.headers);
   headers.set("Cross-Origin-Embedder-Policy", "require-corp");
   headers.set("Cross-Origin-Opener-Policy", "same-origin");
@@ -49,6 +67,10 @@ function addIsolationHeaders(response) {
 // Fetch: serve from cache first, fall back to network
 // Note: Pyodide CDN requests always go to network (too large to cache and must stay fresh)
 self.addEventListener("fetch", (event) => {
+  if (event.request.method !== "GET") {
+    return;
+  }
+
   const url = new URL(event.request.url);
 
   // Always bypass cache for CDN requests (no CORP headers on CDN — fetch directly via CORS mode)
@@ -61,12 +83,15 @@ self.addEventListener("fetch", (event) => {
   }
 
   // Network-first for HTML — always serve fresh page
-  if (event.request.destination === 'document') {
+  if (event.request.destination === "document") {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
           const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          caches
+            .open(CACHE_NAME)
+            .then((cache) => cache.put(event.request, clone))
+            .catch((err) => console.warn("[sw] cache.put failed:", err));
           return addIsolationHeaders(response);
         })
         .catch(() =>
@@ -80,6 +105,12 @@ self.addEventListener("fetch", (event) => {
     caches
       .match(event.request)
       .then((cached) => cached || fetch(event.request))
-      .then((response) => addIsolationHeaders(response)),
+      .then((response) => addIsolationHeaders(response))
+      .catch(
+        () =>
+          new Response("Resource unavailable offline", {
+            status: 503,
+          }),
+      ),
   );
 });
