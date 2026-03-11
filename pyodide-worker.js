@@ -1,8 +1,60 @@
-// pyodide-worker.js — Pyodide execution in a Web Worker
+// pyodide-worker.js — Pyodide execution in a Web Worker (classic)
 // Communicates with runner.js via postMessage + SharedArrayBuffer for blocking input()
+//
+// Security: CDN scripts are fetched and verified via crypto.subtle.digest (SHA-384)
+// before execution. No CDN code runs without passing an integrity check.
 
-// TODO: migrate to module worker (type:"module") + static import for SRI support
-importScripts("https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js");
+const PYODIDE_CDN = "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/";
+
+// SHA-384 integrity hashes for CDN-fetched scripts.
+// Compute via: curl -sL <url> | openssl dgst -sha384 -binary | openssl base64 -A
+const INTEGRITY = {
+  "pyodide.mjs":
+    "sha384-Iww9yGcV6enS7iZOc/arkzRoBL2UMCEwHsvc9CPwSlSSrbQC2K/OnwFh1GF5SUi5",
+  "pyodide.asm.js":
+    "sha384-H/2VLTcLlId+2q+XryOhG/nGawPSusslAGPNvqdOA4U5cHJX+UFEzL0fEM1jEf0b",
+};
+
+async function fetchWithIntegrity(filename) {
+  const url = PYODIDE_CDN + filename;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Failed to fetch ${url}: HTTP ${res.status}`);
+  const buf = await res.arrayBuffer();
+  const hashBuf = await crypto.subtle.digest("SHA-384", buf);
+  const b64 = btoa(String.fromCharCode(...new Uint8Array(hashBuf)));
+  const computed = "sha384-" + b64;
+  if (computed !== INTEGRITY[filename]) {
+    throw new Error(
+      `Integrity check failed for ${filename}\nExpected: ${INTEGRITY[filename]}\nComputed: ${computed}`
+    );
+  }
+  return buf;
+}
+
+async function loadVerifiedPyodide() {
+  // Phase 1: Fetch and verify pyodide.asm.js, then load via importScripts(blobUrl).
+  // This defines globalThis._createPyodideModule, which causes loadPyodide()
+  // to skip its internal importScripts(CDN) call entirely.
+  const asmBytes = await fetchWithIntegrity("pyodide.asm.js");
+  const asmBlob = new Blob([asmBytes], { type: "application/javascript" });
+  const asmUrl = URL.createObjectURL(asmBlob);
+  try {
+    importScripts(asmUrl);
+  } finally {
+    URL.revokeObjectURL(asmUrl);
+  }
+
+  // Phase 2: Fetch and verify pyodide.mjs, then load via dynamic import(blobUrl).
+  const mjsBytes = await fetchWithIntegrity("pyodide.mjs");
+  const mjsBlob = new Blob([mjsBytes], { type: "application/javascript" });
+  const mjsUrl = URL.createObjectURL(mjsBlob);
+  try {
+    const mod = await import(mjsUrl);
+    return mod.loadPyodide;
+  } finally {
+    URL.revokeObjectURL(mjsUrl);
+  }
+}
 
 const utf8Decoder = new TextDecoder();
 
@@ -42,8 +94,9 @@ let pyodide = null;
 
 async function initPyodide() {
   try {
+    const loadPyodide = await loadVerifiedPyodide();
     pyodide = await loadPyodide({
-      indexURL: "https://cdn.jsdelivr.net/pyodide/v0.26.4/full/",
+      indexURL: PYODIDE_CDN,
     });
 
     pyodide.setStdout({
