@@ -7,6 +7,7 @@
 const _createObjectURL = URL.createObjectURL.bind(URL);
 const _revokeObjectURL = URL.revokeObjectURL.bind(URL);
 const _cryptoDigest = crypto.subtle.digest.bind(crypto.subtle);
+const _originalFetch = self.fetch;
 const _fetch = fetch.bind(self);
 const _importScripts = importScripts.bind(self);
 
@@ -19,6 +20,8 @@ const INTEGRITY = Object.freeze({
     "sha384-Iww9yGcV6enS7iZOc/arkzRoBL2UMCEwHsvc9CPwSlSSrbQC2K/OnwFh1GF5SUi5",
   "pyodide.asm.js":
     "sha384-H/2VLTcLlId+2q+XryOhG/nGawPSusslAGPNvqdOA4U5cHJX+UFEzL0fEM1jEf0b",
+  "pyodide.asm.wasm":
+    "sha384-W3dDz77bydlUojTtAGEnjta8TodphdFrtejY4+BmoIXgXs1o+W8t6byLJ71jkOyN",
 });
 
 function timingSafeEqual(a, b) {
@@ -51,6 +54,40 @@ async function fetchWithIntegrity(filename) {
     );
   }
   return buf;
+}
+
+async function verifyingFetch(input, init) {
+  const url = typeof input === "string" ? input : input?.url || String(input);
+  const matchedFilename = Object.keys(INTEGRITY).find((filename) =>
+    url.endsWith(filename)
+  );
+
+  if (!matchedFilename) {
+    return _originalFetch(input, init);
+  }
+
+  const resp = await _originalFetch(input, init);
+  if (!resp.ok) return resp;
+
+  const buf = await resp.arrayBuffer();
+  const hashBuf = await _cryptoDigest("SHA-384", buf);
+  const b64 = btoa(
+    String.fromCharCode(
+      ...Array.from(new Uint8Array(hashBuf), (byte) => byte)
+    )
+  );
+  const computed = "sha384-" + b64;
+  if (!timingSafeEqual(computed, INTEGRITY[matchedFilename])) {
+    throw new Error(
+      `Integrity check failed for ${matchedFilename}\nExpected: ${INTEGRITY[matchedFilename]}\nComputed: ${computed}`
+    );
+  }
+
+  return new Response(buf, {
+    status: resp.status,
+    statusText: resp.statusText,
+    headers: resp.headers,
+  });
 }
 
 async function loadVerifiedPyodide() {
@@ -116,9 +153,14 @@ let pyodide = null;
 async function initPyodide() {
   try {
     const loadPyodide = await loadVerifiedPyodide();
-    pyodide = await loadPyodide({
-      indexURL: PYODIDE_CDN,
-    });
+    self.fetch = verifyingFetch;
+    try {
+      pyodide = await loadPyodide({
+        indexURL: PYODIDE_CDN,
+      });
+    } finally {
+      self.fetch = _originalFetch;
+    }
 
     pyodide.setStdout({
       raw: (charCode) => {
