@@ -17,12 +17,12 @@ A static single-page web application providing an interactive Python tutorial wi
 ### Load Order & CSP
 - **Head**: Pyodide CDN script (`defer` + SRI hash), `style.css` (preload → stylesheet), `runner.js` (preload).
 - **End of main**: `runner.js` (`defer`), Prism scripts (`prism-core`, `prism-python`, `prism-bash` — no defer).
-- **Worker**: Classic Worker via `new Worker("pyodide-worker.js")` — no ES modules.
+- **Worker**: Classic Worker via `new Worker("./pyodide-worker.js")`. CDN scripts are integrity-verified at runtime via `crypto.subtle` SHA-384 before execution.
 - **CSP meta tag**: scripts from `self`/`inline`/`eval`/`cdn.jsdelivr.net`/`blob:`; `worker-src self blob:`.
 
 ### Tooling Note
-- **No Build Process**: No bundlers, no npm/yarn, no package manager.
-- **No Linting**: No ESLint, Prettier, or Ruff configured.
+- **No Build Process**: No bundlers. npm is used for dev tooling only (lint/format), not for builds.
+- **Linting & Formatting**: ESLint v9 (flat config in `eslint.config.mjs`) + Prettier (`.prettierrc`). Run via `npm run lint` / `npm run format`.
 - **No Testing**: No automated test framework.
 - **No CI/CD**: Deployment is handled via direct static file hosting.
 
@@ -32,11 +32,15 @@ A static single-page web application providing an interactive Python tutorial wi
 | `index.html` | Tutorial content (29 sections), semantic HTML structure. |
 | `style.css` | Design system, themes, and responsive layout. |
 | `runner.js` | UI logic and Pyodide orchestration (IIFE pattern). |
-| `pyodide-worker.js` | Web Worker for isolated Python execution. |
+| `pyodide-worker.js` | Web Worker for isolated Python execution. Enforces SRI integrity via `crypto.subtle`. |
 | `sw.js` | Service Worker for caching and header injection. |
 | `serve.py` | Local development server with isolation headers. |
 | `manifest.json` | PWA manifest for "Add to Home Screen" support. |
 | `_headers` | Cloudflare Pages configuration for COOP/COEP. |
+| `eslint.config.mjs` | ESLint v9 flat config for JS linting. |
+| `.prettierrc` | Prettier formatting configuration. |
+| `jsconfig.json` | JS/LSP project config (ES2022, DOM, WebWorker libs). |
+| `package.json` | Dev dependencies and lint/format npm scripts. |
 
 ## Architecture & Key Decisions
 
@@ -58,7 +62,7 @@ The site uses `SharedArrayBuffer` and `Atomics` to allow the Python `input()` fu
 **Interrupt**: Sets `interrupted=true`, notifies; worker throws `__interrupted__` sentinel → `KeyboardInterrupt`.
 
 ### 2. Python Execution
-- **Pyodide**: Loaded from `cdn.jsdelivr.net` (v0.26.4) with SRI hashes.
+- **Pyodide**: Loaded from `cdn.jsdelivr.net` (v0.29.3). Main-thread script uses native SRI (`integrity` attribute). Worker scripts are integrity-verified at runtime via `crypto.subtle` SHA-384 hashes before execution (see `fetchWithIntegrity()` in `pyodide-worker.js`).
 - **AST Execution**: The worker uses an AST-based `_run()` helper to provide REPL-style `repr()` output for the last expression in a block.
 - **Mock files**: Written to Pyodide FS at init: `my_text_file.txt`, `some_data.txt`, `data.csv`, `output.txt`, `open.txt`.
 - **Lazy packages**: `matplotlib`, `scipy`, `pandas` loaded per-snippet via `ensurePackage()`.
@@ -72,7 +76,7 @@ The site uses `SharedArrayBuffer` and `Atomics` to allow the Python `input()` fu
 - **Key rule**: never overrides user-assigned variables.
 
 ### 3. Service Worker & Caching
-- **Cache Name**: Currently `python-guide-v9`. Update this when making breaking changes to assets.
+- **Cache Name**: Currently `python-guide-v11`. Update this when making breaking changes to assets.
 - **Offline Support**: Cache-first strategy for tutorial content.
 - **ASSETS_TO_CACHE**: `/index.html`, `/style.css`, `/runner.js`, `/manifest.json`, `/pyodide-worker.js`, `/favicon.png?v=5`.
 - **CDN bypass**: `cdn.jsdelivr.net`, `fonts.googleapis.com`, `fonts.gstatic.com` are NOT intercepted.
@@ -181,11 +185,12 @@ Several version numbers are **coupled across multiple files**. Changing one with
 | Location | What to change |
 |---|---|
 | `index.html` → `<script src="cdn.jsdelivr.net/.../pyodide.js"` | Version path segment + `integrity` SRI hash |
-| `pyodide-worker.js` → `importScripts("cdn.jsdelivr.net/.../pyodide.js")` (line 4) | Version path segment (no SRI — must match exactly) |
-| `pyodide-worker.js` → `indexURL: "cdn.jsdelivr.net/.../full/"` (line 43) | Version path segment |
+| `pyodide-worker.js` → `PYODIDE_CDN` constant (line 7) | Version path segment |
+| `pyodide-worker.js` → `INTEGRITY` object (lines 11–17) | SHA-384 hashes for `pyodide.mjs` and `pyodide.asm.js` — recompute via `openssl dgst -sha384 -binary <file> \| openssl base64 -A` |
+| `pyodide-worker.js` → `indexURL: PYODIDE_CDN` (in `initPyodide`) | Uses `PYODIDE_CDN` constant — no separate update needed |
 | `AGENTS.md` → §2 Python Execution note | Update version string |
 
-**When to bump**: When upgrading Pyodide. All three version strings must be identical or the worker will load a different Pyodide version than the main thread — silent breakage, no error thrown. The SRI `integrity` hash in `index.html` must match the new file exactly — get it from the Pyodide release notes or compute via `openssl dgst -sha384 -binary pyodide.js | openssl base64 -A`. The `importScripts` call in `pyodide-worker.js` has **no** integrity check, so a version mismatch there fails silently.
+**When to bump**: When upgrading Pyodide. The `PYODIDE_CDN` constant, `INTEGRITY` hashes, and `index.html` script tag must all reference the same Pyodide version. The worker enforces integrity at runtime via `crypto.subtle` — a hash mismatch will throw `Integrity check failed` and abort loading. Compute new hashes by fetching the CDN files and running `openssl dgst -sha384 -binary <file> | openssl base64 -A`, then prefix with `sha384-`.
 
 ### 4. Font Preload WOFF2 URLs
 | Location | What to change |
@@ -203,7 +208,7 @@ These files have **no version query string** and are not referenced by any integ
 |---|---|
 | Favicon image updated | `index.html` (bump `?vN`), `sw.js` (match query string + bump `CACHE_NAME`), `AGENTS.md` |
 | Any cached asset modified (`index.html`, `style.css`, `runner.js`, `pyodide-worker.js`, `manifest.json`) | `sw.js` (bump `CACHE_NAME`), `AGENTS.md` |
-| Pyodide version upgrade | `index.html` (version + SRI hash), `pyodide-worker.js` (line 4 `importScripts` + line 43 `indexURL`), `AGENTS.md` |
+| Pyodide version upgrade | `index.html` (version + SRI hash), `pyodide-worker.js` (`PYODIDE_CDN` + `INTEGRITY` hashes), `AGENTS.md` |
 | Font CDN URL changed | `index.html` (all 4 WOFF2 preload hrefs — 3× Fira Code + 1× Dancing Script) |
 | manifest.json icons changed (`icon-192.png`, `icon-512.png`) | `manifest.json` only — icons are **not** in `ASSETS_TO_CACHE` and will not be served offline |
 
